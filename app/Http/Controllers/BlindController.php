@@ -182,6 +182,7 @@ class BlindController extends Controller
 
         return view('layout.index', compact('volunteers'));
     }
+    // gdfgjvhkbjknlm,;?
     /**
      * Remove the specified resource from storage.
      */
