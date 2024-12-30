@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+
+class CheckUserType
+{
+
+    public function handle(Request $request, Closure $next, $type)
+    {
+        // تحقق مما إذا كان المستخدم قد سجل دخوله
+        if (!Auth::check()) {
+            return redirect('/login'); // توجيه إلى صفحة تسجيل الدخول إذا لم يكن مسجلاً
+        }
+
+        // تحقق من نوع المستخدم
+        $user = Auth::user();
+
+        // المقارنة مع الأنواع المختلفة
+        if ($user->user_type !== $type) {
+            return redirect('/'); // توجيه إلى الصفحة الرئيسية إذا لم يكن من النوع المطلوب
+        }
+
+        return $next($request); // استمر في الطلب إذا كان النوع صحيحًا
+    }
+}

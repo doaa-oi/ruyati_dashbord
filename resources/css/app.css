@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.group:focus .group-focus\:flex {
+    display: flex;
+}
+
+
+
+.collapse {
+    visibility: visible;
+  }
+
+
+
+.hero-bg-image {
+    /* background-image: url(../images/bilndv.png); */
+    background: url('https://static.vecteezy.com/system/resources/previews/027/447/177/large_2x/elderly-person-with-a-cane-shadows-on-the-road-symbolizing-old-age-and-spine-joint-ailments-silhouette-concept-free-photo.jpg')no-repeat center center /cover;
+
+    background-attachment: fixed;
+
+    height: 600px;
+
+}
+
+html , body{
+
+    font-family: "Tajawal", serif !important;
+
+
+}
+
+
+h1:focus, a:focus, span:focus, button:focus {
+    outline: 3px solid #0F9C73;
+}
+
+
+.active {
+    background-color: #0f9c73;
+    color: white;
+}
+
+
+
