@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVolunteerRequest;
 use App\Models\Blind;
+use App\Models\DirectAssistance;
 use App\Models\User;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
@@ -146,12 +147,18 @@ return redirect()->route('volunteers.index');
     ->whereIn('id', $notificationIds)
     ->update(['read_at' => now()]);
 
+    // ابحث عن المساعدة المباشرة بين المتطوع والكفيف
+    $volunteerId = Auth::user()->volunteer->id; // تأكد من أن المتطوع مسجل الدخول
 
+    $assistance = DirectAssistance::where('volunteer_id', $volunteerId)
+                                   ->where('blind_id', $blindId)
+                                   ->first();
 
-         // إعادة عرض معلومات الكفيف
-         return view('layoutv.blind_profile', compact('blind'));
-     }
+    $assistanceId = $assistance ? $assistance->id : null;
 
+    // إعادة عرض معلومات الكفيف وتمرير المعرف
+    return view('layoutv.blind_profile', compact('blind', 'assistanceId'));
+}
 
 
     /**

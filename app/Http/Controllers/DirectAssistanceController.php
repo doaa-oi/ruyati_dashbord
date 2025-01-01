@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Blind;
+use App\Models\DirectAssistance;
+use App\Models\RejectAssistance;
+use App\Models\Volunteer;
+use Illuminate\Http\Request;
+
+class DirectAssistanceController extends Controller
+{
+    public function approveAssistance($volunteerId, $blindId)
+    {
+        // استرجاع المتطوع والكفيف
+        $volunteer = Volunteer::findOrFail($volunteerId);
+        $blind = Blind::findOrFail($blindId);
+
+        // تخزين بيانات المساعدة
+        $assistance = DirectAssistance::create([
+            'volunteer_id' => $volunteer->id,
+            'blind_id' => $blind->id,
+            'approved_at' => now(), // وقت القبول
+        ]);
+
+        // تحديث حالة المتطوع
+        $volunteer->update(['availability' => 'غير متاح']);
+
+        return redirect()->back()->with('success', 'تمت الموافقة على طلب المساعدة بنجاح.');
+    }
+
+    public function completeAssistance($id)
+    {
+        $assistance = DirectAssistance::findOrFail($id);
+        $assistance->update(['completed_at' => now()]); // تحديث وقت الاكتمال
+
+        $volunteer = Volunteer::findOrFail($assistance->volunteer_id);
+        $volunteer->update(['availability' => 'متاح']); // تحديث حالة المتطوع
+
+        return redirect()->back()->with('success', 'تم اكتمال المساعدة بنجاح.');
+    }
+
+
+
+    public function rejectAssistance(Request $request, $volunteerId, $blindId)
+    {
+        // استرجاع المتطوع والكفيف
+        $volunteer = Volunteer::findOrFail($volunteerId);
+        $blind = Blind::findOrFail($blindId);
+
+        // تسجيل الرفض في جدول reject_assistances
+        RejectAssistance::create([
+            'volunteer_id' => $volunteer->id,
+            'blind_id' => $blind->id,
+            'rejection_at' => now(),
+        ]);
+
+        // يمكنك إضافة منطق إضافي هنا إذا أردت
+
+        return redirect()->back()->with('rejection', 'تم رفض طلب المساعدة.'); // رسالة تؤكد الرفض
+    }
+
+
+}

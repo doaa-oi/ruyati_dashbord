@@ -86,15 +86,15 @@ class BlindController extends Controller
         public function show(Blind $blind)
         {
 
-              // الحصول على معلومات المستخدم المسجل دخوله
-             $user = Auth::user();
+                // الحصول على معلومات المستخدم المسجل دخوله
+                $user = Auth::user();
 
-    // الحصول على معلومات المتطوع المرتبطة بالمستخدم
-         $blind = $user->blind; // هذه تمثل السجل في جدول المتطوعين المرتبط بالمستخدم
+        // الحصول على معلومات المتطوع المرتبطة بالمستخدم
+            $blind = $user->blind; // هذه تمثل السجل في جدول المتطوعين المرتبط بالمستخدم
 
 
 
-    return view('layout.profileb', compact('blind')); // يتم تمرير معلومات المتطوع للعرض
+        return view('layout.profileb', compact('blind')); // يتم تمرير معلومات المتطوع للعرض
 
 
         }

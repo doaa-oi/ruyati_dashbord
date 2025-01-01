@@ -3,7 +3,23 @@
 @section('contant')
 
 
+@if(session()->has('success'))
+<div class="bg-green-800 text-center py-4 lg:px-4">
+    <div class="p-2 bg-green-700 items-center text-green-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+      <span class="flex rounded-full bg-green-400 uppercase px-2 py-1 text-xs font-bold mr-3">نجاح</span>
+      <span class="font-semibold mr-2 text-left text-sm flex-auto">{{ session()->get('success') }}</span>
+    </div>
+</div>
+@endif
 
+@if(session()->has('rejection'))  <!-- استخدام 'error' للخطأ -->
+<div class="bg-red-800 text-center py-4 lg:px-4">
+    <div class="p-2 bg-red-700 items-center text-red-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+      <span class="flex rounded-full bg-red-400 uppercase px-2 py-1 text-xs font-bold mr-3">خطأ</span>
+      <span class="font-semibold mr-2 text-left text-sm flex-auto">{{ session()->get('rejection') }}</span>
+    </div>
+</div>
+@endif
 
 <div class="grid  grid-cols-1 md:grid-cols-2 gap-x-20 gap-8 md:py-16 py-60  mx-16">
 
@@ -51,7 +67,7 @@
   </div>
 
 <div class="col-span-2">
-  <div class="flex  justify-start mt-4 mr-36">
+  <div class="flex  justify-start mt-4 mr-36 gap-10">
 
 
 
@@ -61,6 +77,36 @@
         </svg>
         تواصل عبر واتساب
     </a>
+
+    <form action="{{ route('direct.assistance.approve', ['volunteerId' => Auth::user()->volunteer->id, 'blindId' => $blind->id]) }}" method="POST" class="inline-block">
+        @csrf
+        <button type="submit" class="flex items-center justify-center py-3 px-9 bg-blue-600 text-white border border-blue-600 hover:text-blue-600 hover:bg-white rounded-lg font-bold text-sm h-12">
+            قبول تقديم المساعدة
+        </button>
+    </form>
+
+
+<!-- زر اكتمال المساعدة -->
+@if($assistanceId) <!-- تحقق من وجود المعرف قبل عرض الزر -->
+<form action="{{ route('direct.assistance.complete', ['id' => $assistanceId]) }}" method="POST" class="inline-block">
+    @csrf
+    <button type="submit" class="flex items-center justify-center py-3 px-9 bg-blue-600 text-white border border-blue-600 hover:text-blue-600 hover:bg-white rounded-lg font-bold text-sm h-12">
+        اكتمال المساعدة
+    </button>
+</form>
+@else
+    <p>لم يتم تقديم طلب مساعدة لك بعد.</p> <!-- رسالة إن كان لا يوجد مساعدات -->
+@endif
+
+
+    <form action="{{ route('direct.assistance.reject', ['volunteerId' => Auth::user()->volunteer->id, 'blindId' => $blind->id]) }}" method="POST" class="inline-block">
+        @csrf
+        <button type="submit" class="flex items-center justify-center py-3 px-9 bg-red-600 text-white border border-red-600 hover:text-red-600 hover:bg-white rounded-lg font-bold text-sm h-12">
+            رفض تقديم المساعدة
+        </button>
+    </form>
+
+
 
 </div>
 

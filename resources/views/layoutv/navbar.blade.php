@@ -52,7 +52,9 @@
         @else
             @foreach($volunteer->unreadNotifications as $notification)
                 <li class="flex p-3 hover:bg-green-100 transition duration-200">
-                    <a href="{{ route('blind.profile', ['encryptedId' => Crypt::encrypt($notification->data['BlindId'])]) }}" class="flex w-full">
+                    {{-- <a href="{{ route('blind.profile', ['encryptedId' => Crypt::encrypt($notification->data['BlindId'])]) }}" class="flex w-full"> --}}
+                        <a href="{{ route('blind.profile', ['encryptedId' => Crypt::encrypt($notification->data['BlindId']), 'from_notification' => true]) }}" class="flex w-full">
+
                         <div class="notifyimg bg-pink inline-block mr-3">
 
 

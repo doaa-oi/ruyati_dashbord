@@ -3,11 +3,14 @@
 use App\Http\Controllers\AssistanceController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\BlindController;
+use App\Http\Controllers\DirectAssistanceController;
 use App\Http\Controllers\HelpRequestController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RejectAssistanceController;
 use App\Http\Controllers\VolunteerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckUserType;
+use App\Models\DirectAssistance;
 use App\Models\HelpRequest;
 
 Route::get('/', function () {
@@ -94,6 +97,12 @@ Route::middleware(['auth', 'checkUserType:volunteer'])->group(function () {
 
     Route::post('/assistance/approve/{volunteerId}/{blindId}/{requestId}', [AssistanceController::class, 'approveAssistance'])->name('assistance.approve');
     Route::post('/assistance/complete/{id}', [AssistanceController::class, 'completeAssistance'])->name('assistance.complete');
+
+
+
+    Route::post('/direct/assistance/approve/{volunteerId}/{blindId}', [DirectAssistanceController::class, 'approveAssistance'])->name('direct.assistance.approve');
+    Route::post('/direct/assistance/complete/{id}', [DirectAssistanceController::class, 'completeAssistance'])->name('direct.assistance.complete');
+    Route::post('/assistance/reject/{volunteerId}/{blindId}', [DirectAssistanceController::class, 'rejectAssistance'])->name('direct.assistance.reject');
 
 
 });
