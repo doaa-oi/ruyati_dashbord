@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assistance;
 use App\Models\Blind;
+use App\Models\DirectAssistance;
 use App\Models\HelpRequest;
 use App\Models\User;
 use App\Models\Volunteer;
@@ -42,12 +43,18 @@ class HelpRequestController extends Controller
 
    public function inProgressRequests()
    {
+
+    $assistanceID = DirectAssistance::where('status', 'قيد التنفيذ')
+    ->pluck('blind_id'); // جمع معرفات المكفوفين
+
+    $blinds = Blind::whereIn('id', $assistanceID)->get();
+
        // استرجاع طلبات المساعدة التي تحمل الحالة "قيد التنفيذ"
        $help_requests = HelpRequest::with('blind') // تحميل العلاقة مع الكفيف
        ->where('status', 'قيد التنفيذ')
        ->get();
        // إعادة عرض الطلبات في واجهة جديدة
-       return view('layoutv.myposts', compact('help_requests'));
+       return view('layoutv.myposts', compact('help_requests','blinds'));
    }
 
 

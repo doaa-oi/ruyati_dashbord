@@ -35,4 +35,10 @@ class Blind extends Model
     public function helprequest(){
         return $this->hasMany(HelpRequest::class,'user_id');
     }
+
+    public function directAssistances()
+    {
+        return $this->hasMany(DirectAssistance::class.'blind_id');
+    }
+
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('blind_id')->constrained('blinds')->onDelete('cascade'); // معرف الكفيف
             $table->timestamp('approved_at')->nullable();
             $table->timestamp('completed_at')->nullable(); // لتخزين وقت اكتمال المساعدة
+            $table->enum('status', ['قيد التنفيذ', 'مكتمل'])->default('قيد التنفيذ');
             $table->timestamps();
         });
     }

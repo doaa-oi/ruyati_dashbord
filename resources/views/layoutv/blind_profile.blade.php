@@ -77,6 +77,7 @@
         </svg>
         تواصل عبر واتساب
     </a>
+    @if(request()->has('from_notification') && request()->get('from_notification') == true)
 
     <form action="{{ route('direct.assistance.approve', ['volunteerId' => Auth::user()->volunteer->id, 'blindId' => $blind->id]) }}" method="POST" class="inline-block">
         @csrf
@@ -106,7 +107,7 @@
         </button>
     </form>
 
-
+    @endif
 
 </div>
 

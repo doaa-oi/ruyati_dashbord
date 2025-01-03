@@ -21,6 +21,8 @@ class DirectAssistanceController extends Controller
             'volunteer_id' => $volunteer->id,
             'blind_id' => $blind->id,
             'approved_at' => now(), // وقت القبول
+            'status' => 'قيد التنفيذ', // تعيين الحالة إلى قيد التنفيذ
+
         ]);
 
         // تحديث حالة المتطوع
@@ -32,7 +34,15 @@ class DirectAssistanceController extends Controller
     public function completeAssistance($id)
     {
         $assistance = DirectAssistance::findOrFail($id);
-        $assistance->update(['completed_at' => now()]); // تحديث وقت الاكتمال
+        $assistance->update([
+
+            'completed_at' => now(),
+            'status' => 'مكتمل', // تحديث الحالة إلى مكتمل
+
+
+
+    ]); // تحديث وقت الاكتمال
+
 
         $volunteer = Volunteer::findOrFail($assistance->volunteer_id);
         $volunteer->update(['availability' => 'متاح']); // تحديث حالة المتطوع

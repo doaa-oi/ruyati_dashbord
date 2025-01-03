@@ -14,6 +14,7 @@ class DirectAssistance extends Model
         'blind_id',
         'approved_at',
         'completed_at',
+        'status',
     ];
 
     public function volunteer()
@@ -23,7 +24,7 @@ class DirectAssistance extends Model
 
     public function blind()
     {
-        return $this->belongsTo(Blind::class);
+        return $this->belongsTo(Blind::class,'blind_id');
     }
 
 }
