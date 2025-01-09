@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Marhey:wght@300..700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
 
+
 </head>
 <body>
 
@@ -22,7 +23,7 @@
         />
 
         <div class=" lg:relative lg:block lg:p-12">
-          <h2 class="mt-6 text-2xl font-bold text-green-900 sm:text-3xl md:text-4xl">
+          <h2 style="font-family: Tajawal" class="mt-6 text-2xl font-bold text-green-900 sm:text-3xl md:text-4xl">
             أهلا بكم في رؤيتي
           </h2>
           <p class="mt-4 leading-relaxed text-green-900">

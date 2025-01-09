@@ -6,6 +6,7 @@ use App\Http\Controllers\BlindController;
 use App\Http\Controllers\DirectAssistanceController;
 use App\Http\Controllers\HelpRequestController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RejectAssistanceController;
 use App\Http\Controllers\VolunteerController;
 use Illuminate\Support\Facades\Route;
@@ -107,7 +108,8 @@ Route::middleware(['auth', 'checkUserType:volunteer'])->group(function () {
 
 });
 Route::get('/blind/{encryptedId}', [VolunteerController::class, 'showblind'])->name('blind.profile');
-
+Route::post('/submit-rating', [RatingController::class, 'submitRating'])->name('rating.submit');
+Route::get('/rating', [RatingController::class, 'showRatingForm']);
 
 // // حماية route الأدمن
 // Route::middleware(['auth', 'checkUserType:admin'])->group(function () {

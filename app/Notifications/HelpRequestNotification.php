@@ -37,7 +37,7 @@ class HelpRequestNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'BlindId' => $this->blindId,
+            'BlindId' => (string)$this->blindId, // تأكد من سلامة القيمة هنا
             'BlindName' => $this->blindName,
             // أضف أي بيانات إضافية حسب الحاجة
         ];

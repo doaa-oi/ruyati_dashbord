@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DirectAssistance extends Model
+class Rating extends Model
 {
+
     use HasFactory;
 
     protected $fillable = [
         'volunteer_id',
         'blind_id',
-        'approved_at',
-        'completed_at',
-        'status',
+        'rating',
     ];
 
+    // تعريف علاقات النموذج
     public function volunteer()
     {
         return $this->belongsTo(Volunteer::class,'volunteer_id');

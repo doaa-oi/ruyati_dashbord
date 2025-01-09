@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('type');
             $table->morphs('notifiable');
-            $table->text('data');
+            $table->jsonb('data'); // تعديل نوع العمود إلى jsonb
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });

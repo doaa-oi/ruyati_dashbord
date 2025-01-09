@@ -137,15 +137,14 @@ return redirect()->route('volunteers.index');
          $blind = Blind::findOrFail($blindId); // تأكد من أن ID صحيح
 
 
-   // احصل على  الإشعارات المطابقة
-   $notificationIds = DB::table('notifications')
-   ->where('data->BlindId', $blind->id)
-   ->pluck('id');
+         $notificationIds = DB::table('notifications')
+         ->where('data->BlindId', (string)$blind->id)  // تأكد أن value هذا برقم صحيح أو نصي بناءً على ما هو مخزن
+         ->pluck('id');
 
-    // تحديث جميع الإشعارات المطابقة لتعيين الوقت الحالي كوقت القراءة
-    DB::table('notifications')
-    ->whereIn('id', $notificationIds)
-    ->update(['read_at' => now()]);
+     // تحديث جميع الإشعارات المطابقة لتعيين الوقت الحالي كوقت القراءة
+     DB::table('notifications')
+         ->whereIn('id', $notificationIds)
+         ->update(['read_at' => now()]);
 
     // ابحث عن المساعدة المباشرة بين المتطوع والكفيف
     $volunteerId = Auth::user()->volunteer->id; // تأكد من أن المتطوع مسجل الدخول

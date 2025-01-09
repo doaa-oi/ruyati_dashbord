@@ -9,8 +9,10 @@ use App\Models\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+
 
 class BlindController extends Controller
 {
@@ -161,8 +163,22 @@ class BlindController extends Controller
         // البحث عن الكفيف بناءً على معرفه
         $volunteer = Volunteer::findOrFail($volunteerId); // تأكد من أن ID صحيح
 
+
+        // استرجاع إشعارات المتطوع من جدول notifications
+        $notifications = DB::table('notifications')
+        ->where('data->VolunteerId', (string)$volunteer->id) // التأكد من أن القيمة برقم صحيح أو نصي
+        ->get();
+      //  dd($notifications); // اضف هذا السطر للتحقق من وجود البيانات
+
+        // تحديث جميع الإشعارات المطابقة لتعيين الوقت الحالي كوقت القراءة
+        DB::table('notifications')
+        ->whereIn('id', $notifications->pluck('id'))
+        ->update(['read_at' => now()]);
+
+
+
         // إعادة عرض معلومات الكفيف
-        return view('layout.volunteer_profile', compact('volunteer'));
+        return view('layout.volunteer_profile', compact('volunteer', 'notifications'));
     }
 
     public function search(Request $request)

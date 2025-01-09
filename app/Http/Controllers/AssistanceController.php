@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assistance;
+use App\Models\Blind;
 use App\Models\HelpRequest;
 use App\Models\Volunteer;
+use App\Notifications\AssistanceCompletedNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class AssistanceController extends Controller
 {
@@ -46,9 +49,14 @@ class AssistanceController extends Controller
         $helpRequest->update(['status' => 'مكتمل']); // تعيين الحالة إلى "مكتمل"
 
         $volunteer = Volunteer::findOrFail($assistance->volunteer_id); // تأكد من وجود حقل volunteer_id
+        $blind = Blind::findOrFail($assistance->blind_id); // تأكد من وجود حقل blind_id
 
         // تحديث حالة المتطوع إلى "متاح"
         $volunteer->update(['availability' => 'متاح']); // تأكد من أن لديك حقل availability في جدول المتطوعين
+
+       // $blind = Blind::findOrFail($helpRequest->blind_id); // استرجاع الكفيف المرتبط
+       // $blind->notify(new AssistanceCompletedNotification($assistance));
+        Notification::send($blind, new AssistanceCompletedNotification($volunteer->id, $volunteer->name,$assistance));
 
         return redirect()->back()->with('success', 'تم اكتمال المساعدة بنجاح.');
     }

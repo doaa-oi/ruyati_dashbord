@@ -6,7 +6,9 @@ use App\Models\Blind;
 use App\Models\DirectAssistance;
 use App\Models\RejectAssistance;
 use App\Models\Volunteer;
+use App\Notifications\AssistanceCompletedNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class DirectAssistanceController extends Controller
 {
@@ -46,6 +48,10 @@ class DirectAssistanceController extends Controller
 
         $volunteer = Volunteer::findOrFail($assistance->volunteer_id);
         $volunteer->update(['availability' => 'متاح']); // تحديث حالة المتطوع
+
+        $blind = Blind::findOrFail($assistance->blind_id); // تأكد من وجود حقل blind_id
+
+        Notification::send($blind, new AssistanceCompletedNotification($volunteer->id, $volunteer->name,$assistance->id));
 
         return redirect()->back()->with('success', 'تم اكتمال المساعدة بنجاح.');
     }

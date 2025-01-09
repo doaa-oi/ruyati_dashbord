@@ -30,7 +30,7 @@
     <div id="1" class="hero-bg-image flex flex-col items-start justify-end  pr-24 " >
 
         <div class="relative w-34 h-full mt-64 ">
-        <h1 class="text-gray-100 text-4xl  font-bold  text-start">جمعية تمكن المتطوعين </h1>
+        <h1  class="text-gray-100 text-4xl font-bold text-start">جمعية تمكن المتطوعين </h1>
         <h1 class="text-gray-100 text-4xl  font-bold pb-10 text-start">   من مساعدة المكفوفين</h1>
 
 
