@@ -12,6 +12,15 @@
 </div>
 @endif
 
+@if(session()->has('rating')) <!-- إضافة تنبيه للتعديل -->
+<div class="bg-blue-800 text-center py-4 lg:px-4">
+    <div class="p-2 bg-blue-700 items-center text-blue-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+      <span class="flex rounded-full bg-blue-400 uppercase px-2 py-1 text-xs font-bold mr-3">تقييم</span>
+      <span class="font-semibold mr-2 text-left text-sm flex-auto">{{ session()->get('rating') }}</span>
+    </div>
+</div>
+@endif
+
 <div class="grid  grid-cols-1 md:grid-cols-2 gap-x-20 gap-8 md:py-16 py-60  mx-16">
 
 
@@ -94,8 +103,78 @@
 
 
 </div>
+<h1>إشعاراتك</h1>
+@if (isset($notifications) && $notifications->isEmpty()) <!-- يتحقق من وجود إشعارات غير مقروءة -->
+    <p>لا توجد إشعارات حالياً.</p>
+@else
+    @foreach ($notifications as $notification)
+        @if (is_null($notification->read_at)) <!-- تحقق مما إذا كانت الإشعار غير مقروء -->
+            @php
+                // تحويل نص JSON إلى مصفوفة
+                $data = json_decode($notification->data, true);
+            @endphp
 
 
+        <div class="fixed inset-0 bg-black opacity-50 backdrop"></div>
+
+        <div class="flex items-center justify-center h-screen -mt-96"> <!-- الحاوية الأساسية -->
+            <div class="relative z-10 bg-green-50 p-8 rounded-lg shadow-lg h-80 w-2/5 border-4 border-customGreen mb-4">
+                <h2 class="text-xl mb-6 text-center">لقد أكمل المتطوع <span class="text-customGreen font-bold">{{ $data['VolunteerName']}}</span> تقديم المساعدة</h2>
+                <h2 class="text-xl mb-10 text-center">اختر تقييمك (1-5)</h2>
+
+                <form id="ratingForm" method="POST" action="{{ route('rating.submit') }}">
+                    @csrf
+                    <input type="hidden" name="volunteer_id" value="{{ $volunteer->id }}">
+                    @error('volunteer_id')
+                    <p class="" style="color: red">{{ $message }}</p>
+                    @enderror
+                    <input type="hidden" name="blind_id" value="{{ Auth::user()->blind->id }}">
+                    @error('blind_id')
+                    <p class="" style="color: red">{{ $message }}</p>
+                    @enderror
+
+
+                    <div class="flex justify-around items-center mb-4">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <div class="flex items-center">
+                                <input type="radio" name="rating" id="rating{{ $i }}" value="{{ $i }}" class="hidden" onclick="setRating({{ $i }})">
+                                <label for="rating{{ $i }}" class="w-14 h-14 flex items-center justify-center rounded-full border-2 border-customGreen cursor-pointer hover:bg-green-300 text-customGreen font-bold text-2xl">
+                                    {{ $i }}
+                                </label>
+                            </div>
+                        @endfor
+                    </div>
+
+                <div class="absolute ">
+                    <button type="submit" class="w-full h-12 px-10 bg-customGreen text-white rounded-full hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-200">
+                        ارسال تقييم
+                    </button>
+                </div>
+            </form>
+
+{{-- <form action="">
+     <!-- زر البلاغات -->
+     <button type="submit" class="ml-4 w-24 h-12 bg-red-500 text-white rounded-full hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-red-300" onclick="alert('هذا هو زر البلاغات. يمكنك إضافة ميزات جديدة هنا.')">
+        بلاغ
+    </button>
+</form> --}}
+
+
+
+            </div>
+        </div>
+        @endif
+
+    @endforeach
+@endif
+
+<script>
+    function setRating(rating) {
+        // تعيين القيمة إلى الحقل المخفي عند اختيار تقييم معين
+        document.getElementById('ratingValue').value = rating;
+    }
+</script>
+{{--
 @if ($notifications) <!-- استخدام المتغير بشكل صحيح -->
 
     @foreach ($notifications as $notification) <!-- استخدام حلقة للمرور عبر جميع الإشعارات -->
@@ -111,14 +190,21 @@
             <h2 class="text-xl mb-6 text-center">لقد أكمل المتطوع <span class="text-customGreen font-bold">{{ $data['VolunteerName']}}</span> تقديم المساعدة</h2>
             <h2 class="text-xl mb-10 text-center">اختر تقييمك (1-5)</h2>
             <div class="flex justify-around items-center mb-4">
-                @for ($i = 1; $i <= 5; $i++)
-                    <button class="w-14 h-14 flex items-center justify-center rounded-full bg-customGreen text-white text-2xl font-bold hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-300" onclick="submitRating({{ $i }})">
-                        {{ $i }}
-                    </button>
-                @endfor
+                <form id="ratingForm" method="POST" action="{{ route('rating.submit') }}">
+                    @csrf
+                    <input type="hidden" name="volunteer_id" value="{{ $volunteer->id }}">
+                    <input type="hidden" name="blind_id" value="{{ Auth::user()->blind->id }}">
+                    <input type="hidden" name="rating" id="ratingValue"> <!-- حقل مخفي لتخزين قيمة التقييم -->
+
+                    @for ($i = 1; $i <= 5; $i++)
+                        <button type="submit" class="w-14 h-14 flex items-center justify-center rounded-full bg-customGreen text-white text-2xl font-bold hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-300" onclick="submitRating({{ $i }})">
+                            {{ $i }}
+                        </button>
+                    @endfor
+                </form>
             </div>
             <div class="absolute my-4 left-4">
-                <button type="button" class="w-full h-12 px-10 bg-red-500 text-white rounded-full hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-red-300">
+                <button type="submit" class="w-full h-12 px-10 bg-red-500 text-white rounded-full hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-red-300">
                     بلاغ
                 </button>
             </div>
@@ -128,13 +214,16 @@
 @endif
 
 
-    <script>
-        function submitRating(rating) {
-            // هنا يمكنك تنفيذ أي عملية عند النقر على النجوم (مثل الإرسال إلى الخادم)
-            console.log("تم التقييم: " + rating);
-            // يمكنك أيضًا إغلاق النافذة أو إخفائها بعد التقييم
-        }
-    </script>
+<script>
+    function submitRating(rating) {
+        // تعيين القيمة إلى الحقل المخفي
+        document.getElementById('ratingValue').value = rating;
+
+        // تقديم النموذج
+        document.getElementById('ratingForm').submit();
+    }
+</script> --}}
+
 </div>
 
 <script>

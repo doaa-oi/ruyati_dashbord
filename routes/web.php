@@ -109,7 +109,7 @@ Route::middleware(['auth', 'checkUserType:volunteer'])->group(function () {
 });
 Route::get('/blind/{encryptedId}', [VolunteerController::class, 'showblind'])->name('blind.profile');
 Route::post('/submit-rating', [RatingController::class, 'submitRating'])->name('rating.submit');
-Route::get('/rating', [RatingController::class, 'showRatingForm']);
+// Route::get('/rating', [RatingController::class, 'showRatingForm']);
 
 // // حماية route الأدمن
 // Route::middleware(['auth', 'checkUserType:admin'])->group(function () {

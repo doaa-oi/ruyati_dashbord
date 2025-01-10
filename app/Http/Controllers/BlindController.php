@@ -152,6 +152,7 @@ class BlindController extends Controller
     }
 
 
+
     public function showvolunteer($encryptedId)
     {
 
@@ -160,7 +161,7 @@ class BlindController extends Controller
         // فك تشفير المعرف
         $volunteerId = Crypt::decrypt($encryptedId);
 
-        // البحث عن الكفيف بناءً على معرفه
+        // البحث عن المتطوع بناءً على معرفه
         $volunteer = Volunteer::findOrFail($volunteerId); // تأكد من أن ID صحيح
 
 
@@ -168,7 +169,7 @@ class BlindController extends Controller
         $notifications = DB::table('notifications')
         ->where('data->VolunteerId', (string)$volunteer->id) // التأكد من أن القيمة برقم صحيح أو نصي
         ->get();
-      //  dd($notifications); // اضف هذا السطر للتحقق من وجود البيانات
+       //dd($notifications); // اضف هذا السطر للتحقق من وجود البيانات
 
         // تحديث جميع الإشعارات المطابقة لتعيين الوقت الحالي كوقت القراءة
         DB::table('notifications')
