@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
+use App\Models\Volunteer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,9 +39,21 @@ class AuthenticatedSessionController extends Controller
 
             // توجيه المستخدم حسب نوعه
             if ($user->user_type == 'volunteer') {
-                return redirect()->route('volunteers.index'); // تأكد من وجود route مناسبة
+                // البحث عن المتطوع المرتبط بالمستخدم
+                $volunteer = Volunteer::where('user_id', $user->id)->first(); // تأكد من استخدام المفتاح الصحيح
+
+                if ($volunteer) {
+                    // تحقق من حالة المتطوع
+                    if ($volunteer->status == 1) {
+                        return redirect()->route('volunteers.index'); // توجيه إلى الصفحة إذا كانت الحالة مفعلّة
+                    } else {
+                        return redirect()->route('landing.master'); // توجيه إلى صفحة أخرى إذا كانت الحالة غير مفعلّة
+                    }
+                }
             } elseif ($user->user_type == 'blind') {
                 return redirect()->route('blinds.index'); // تأكد من وجود route مناسبة
+            } elseif ($user->user_type == 'admin') {
+                return redirect()->route('show.volunteers'); // تأكد من وجود route مناسبة
             }
         }
 

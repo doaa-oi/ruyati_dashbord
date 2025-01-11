@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssistanceController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\BlindController;
@@ -16,7 +17,7 @@ use App\Models\HelpRequest;
 
 Route::get('/', function () {
     return view('landing.master');
-})->name('home');
+})->name('landing.master');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -72,6 +73,7 @@ Route::middleware(['auth', 'checkUserType:blind'])->group(function () {
     Route::post('/send-help-request/{encryptedId}/{encryptedBlindId}', [HelpRequestController::class, 'sendHelpRequest'])->name('send.help.request');
 
     Route::get('/search-volunteers', [BlindController::class, 'search'])->name('search.volunteers');
+    Route::post('/submit-rating', [RatingController::class, 'submitRating'])->name('rating.submit');
 
 
 });
@@ -107,14 +109,19 @@ Route::middleware(['auth', 'checkUserType:volunteer'])->group(function () {
 
 
 });
-Route::get('/blind/{encryptedId}', [VolunteerController::class, 'showblind'])->name('blind.profile');
-Route::post('/submit-rating', [RatingController::class, 'submitRating'])->name('rating.submit');
+//Route::get('/blind/{encryptedId}', [VolunteerController::class, 'showblind'])->name('blind.profile');
 // Route::get('/rating', [RatingController::class, 'showRatingForm']);
 
 // // حماية route الأدمن
-// Route::middleware(['auth', 'checkUserType:admin'])->group(function () {
-//     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-// });
+Route::middleware(['auth', 'checkUserType:admin'])->group(function () {
+    // Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.index');
+    Route::get('/show/blinds', [AdminController::class, 'showBlinds'])->name('show.blinds');
+    Route::get('/show/volunteers', [AdminController::class, 'showVolunteers'])->name('show.volunteers');
+    Route::get('/new/volunteers/requests', [AdminController::class, 'newVolunteer'])->name('new.volunteers.requests');
+    Route::post('/volunteers/{id}/accept', [AdminController::class, 'accept'])->name('volunteers.accept');
+    Route::post('/volunteers/{id}/reject', [AdminController::class, 'reject'])->name('volunteers.reject');
+    Route::post('/blind/{id}/reject', [AdminController::class, 'reject_blind'])->name('blind.reject');
+});
 
 // Route::get('volunteer-edit/{id}', [VolunteerController::class,'edit'])->name('volunteer.edit');
 //Route::get('/volunteer/{volunteer}/edit', [VolunteerController::class, 'edit'])->name('volunteer.edit');

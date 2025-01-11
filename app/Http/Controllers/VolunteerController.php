@@ -84,7 +84,8 @@ class VolunteerController extends Controller
             'available_from' => $request->available_from,
             'available_to' => $request->available_to,
             'availability' => 'متاح',
-            'rating' => '0.0',
+            'rating' => 0.0,
+            'status' => 0,
             'user_type' => $request->user_type,
 
 ]);

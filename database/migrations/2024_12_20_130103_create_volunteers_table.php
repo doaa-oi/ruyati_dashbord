@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('user_type')->default('volunteer');
             $table->enum('availability', ['متاح', 'غير متاح'])->default('متاح'); // تعيين القيمة الافتراضية
             $table->decimal('rating')->default(0);
+            $table->boolean('status')->default(0); // حقل للاشارة إن كان مفعل أو لا (0 لغير مفعل و1 لمفعل).
             $table->timestamps();
             $table->foreignId('user_id')
             ->constrained('users')

@@ -31,6 +31,7 @@ class Volunteer extends Model
         'user_id',
         'availability',
         'rating',
+        'status',
     ];
     protected $hidden = [
         'password',

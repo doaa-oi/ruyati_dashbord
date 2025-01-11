@@ -5,7 +5,7 @@
     @vite('resources/css/app.css')
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>واجهة الكفيف</title>
+    <title>واجهة المتطوع</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Marhey:wght@300..700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -16,8 +16,8 @@
 
 
 
-<div> @include('layout.navbar') </div>
-<div>@include('layout.sidebar') </div>
+<div> @include('admin.navbar') </div>
+<div>@include('admin.sidebar') </div>
 
 
   <div class="sm:mr-64">
