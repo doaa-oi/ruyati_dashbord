@@ -75,6 +75,7 @@ Route::middleware(['auth', 'checkUserType:blind'])->group(function () {
     Route::get('/search-volunteers', [BlindController::class, 'search'])->name('search.volunteers');
     Route::post('/submit-rating', [RatingController::class, 'submitRating'])->name('rating.submit');
 
+    Route::post('/report', [BlindController::class, 'report'])->name('report.submit');
 
 });
 
@@ -121,6 +122,10 @@ Route::middleware(['auth', 'checkUserType:admin'])->group(function () {
     Route::post('/volunteers/{id}/accept', [AdminController::class, 'accept'])->name('volunteers.accept');
     Route::post('/volunteers/{id}/reject', [AdminController::class, 'reject'])->name('volunteers.reject');
     Route::post('/blind/{id}/reject', [AdminController::class, 'reject_blind'])->name('blind.reject');
+    Route::get('/show/report', [AdminController::class, 'showReports'])->name('show.report');
+    Route::post('/volunteers/{id}/reject/report', [AdminController::class, 'rejectReport'])->name('volunteers.reject.report');
+    Route::post('/volunteers/{id}/deactivate', [AdminController::class, 'deactivate'])->name('volunteers.deactivate');
+
 });
 
 // Route::get('volunteer-edit/{id}', [VolunteerController::class,'edit'])->name('volunteer.edit');

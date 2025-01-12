@@ -14,9 +14,16 @@
 
         </li>
           <li>
+           <a class="flex items-center flex-shrink-0 h-14 px-2 text-sm font-medium rounded hover:bg-customGreen hover:text-white {{Request::is('show/report')  ? 'active' : 'bg-white text-customGreen' }}" href="{{ route('show.report') }}">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M466.3 225.3c4.7-22.6 .9-44.5-9-63 3-23.9-4-48.6-17.3-67C439 39.4 404.1 0 327 0c-7 0-15 0-22.2 0C201.2 0 169 40 128 40h-10.8c-5.6-5-13-8-21.2-8H32C14.3 32 0 46.3 0 64v240c0 17.7 14.3 32 32 32h64c11.8 0 22.2-6.4 27.7-16h7.1c19.1 17 46 60.7 68.8 83.4 13.7 13.7 10.2 108.6 71.8 108.6 57.6 0 95.3-31.9 95.3-104.7 0-18.4-3.9-33.7-8.9-46.5h36.5c48.6 0 85.8-41.6 85.8-85.6 0-19.2-5-35-13.7-49.8zM64 296c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zm330.2 16.7H290.2c0 37.8 28.4 55.4 28.4 94.5 0 23.8 0 56.7-47.3 56.7-18.9-18.9-9.5-66.2-37.8-94.5C206.9 342.9 167.3 272 138.9 272H128V85.8c53.6 0 100-37.8 171.6-37.8h37.8c35.5 0 60.8 17.1 53.1 65.9 15.2 8.2 26.5 36.4 13.9 57.6 21.6 20.4 18.7 51.1 5.2 65.6 9.5 0 22.4 18.9 22.3 37.8-.1 18.9-16.7 37.8-37.8 37.8z"/></svg>
+            <span class="mr-4 leading-none"> البلاغات</span>
+           </a>
+          </li>
+
+          <li>
            <a class="flex items-center flex-shrink-0 h-14 px-2 text-sm font-medium rounded hover:bg-customGreen hover:text-white {{Request::is('help-requests/pending') || Request::is('help-requests/in-progress') || Request::is('help-requests/pending') ? 'active' : 'bg-white text-customGreen' }}" href="{{ route('help.requests.pending') }}">
-               <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="currentColor" d="M48 0C21.5 0 0 21.5 0 48v64c0 8.8 7.2 16 16 16h80V48C96 21.5 74.5 0 48 0zm208 412.6V352h288V96c0-52.9-43.1-96-96-96H111.6C121.7 13.4 128 29.9 128 48v368c0 38.9 34.7 69.7 74.8 63.1C234.2 474 256 444.5 256 412.6zM288 384v32c0 52.9-43.1 96-96 96h336c61.9 0 112-50.1 112-112 0-8.8-7.2-16-16-16H288z"/></svg>
-               <span class="mr-4 leading-none">طلبات المساعدة</span>
+            <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#0f9c73" d="M396.8 352h22.4c6.4 0 12.8-6.4 12.8-12.8V108.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v230.4c0 6.4 6.4 12.8 12.8 12.8zm-192 0h22.4c6.4 0 12.8-6.4 12.8-12.8V140.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v198.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h22.4c6.4 0 12.8-6.4 12.8-12.8V204.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v134.4c0 6.4 6.4 12.8 12.8 12.8zM496 400H48V80c0-8.8-7.2-16-16-16H16C7.2 64 0 71.2 0 80v336c0 17.7 14.3 32 32 32h464c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16zm-387.2-48h22.4c6.4 0 12.8-6.4 12.8-12.8v-70.4c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v70.4c0 6.4 6.4 12.8 12.8 12.8z"/></svg>
+            <span class="mr-4 leading-none"> التقارير</span>
            </a>
           </li>
 

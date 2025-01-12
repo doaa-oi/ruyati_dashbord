@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blind;
+use App\Models\Report;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
 
@@ -82,6 +83,43 @@ class AdminController extends Controller
         $blind->delete(); // حذف المتطوع
 
         return redirect()->back()->with('reject', 'تم حذف الكفيف.');
+    }
+
+    public function showReports()
+    {
+        $reports = Report::where('status', 0)->get();
+        return view('admin.reports', compact('reports'));
+    }
+
+    public function rejectReport($id)
+    {
+
+    // ابحث عن المتطوع بناءً على المعرف
+    $volunteer = Volunteer::findOrFail($id);
+
+    // تحديث حالة البلاغات المرتبطة بالمتطوع
+    Report::where('volunteer_id', $volunteer->id)->update(['status' => 1]); // تغيير الحالة إلى 1
+
+    // حذف المتطوع
+    $volunteer->delete(); // قم بحذف المتطوع من قاعدة البيانات
+
+    return redirect()->back()->with('success', 'تم حذف المتطوع وتحديث حالة البلاغ.');
+    }
+
+    public function deactivate($id) // تعديل الاسم هنا
+    {
+        // ابحث عن المتطوع بناءً على المعرف
+        $volunteer = Volunteer::findOrFail($id);
+
+        // تحديث حالة البلاغات المرتبطة بالمتطوع إلى 1
+        Report::where('volunteer_id', $volunteer->id)->update(['status' => 1]); // تغيير حالة البلاغ إلى 1
+
+        // تحديث حالة المتطوع إلى 0
+        $volunteer->status = 0; // تعيين حالة المتطوع إلى غير مفعل
+        $volunteer->availability = 'غير متاح';
+        $volunteer->save(); // حفظ التغييرات في قاعدة البيانات
+
+        return redirect()->back()->with('success', 'تم تحديث حالة المتطوع وحالة البلاغ بنجاح.');
     }
 
 }

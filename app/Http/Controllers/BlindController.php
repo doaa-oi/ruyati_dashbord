@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlindRequest;
 use App\Models\Blind;
+use App\Models\Report;
 use App\Models\User;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
@@ -206,5 +207,22 @@ class BlindController extends Controller
     public function destroy(Blind $blind)
     {
         //
+    }
+
+    public function report(Request $request)
+    {
+        $request->validate([
+            'report_details' => 'required|string|max:1000', // تأكيد أن حقل البلاغ مطلوب ويجب أن لا يتجاوز 1000 حرف
+        ]);
+
+        // إنشاء البلاغ في قاعدة البيانات
+        Report::create([
+            'volunteer_id' => $request->input('volunteer_id'),
+            'blind_id' => $request->input('blind_id'),
+            'message' => $request->input('report_details'),
+            'status' => 0,
+        ]);
+
+        return redirect()->back()->with('report', 'تم إرسال البلاغ بنجاح.');
     }
 }
