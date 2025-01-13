@@ -72,15 +72,16 @@ class AdminController extends Controller
     public function reject($id)
     {
         $volunteer = Volunteer::findOrFail($id);
-        $volunteer->delete(); // حذف المتطوع
-
+        $volunteer->status = 3; // تعيين الحالة إلى "محذوف"
+        $volunteer->save();
         return redirect()->back()->with('reject', 'تم رفض طلب المتطوع وحذفه.');
     }
 
     public function reject_blind($id)
     {
         $blind = Blind::findOrFail($id);
-        $blind->delete(); // حذف المتطوع
+        $blind->status = 0; // تعيين الحالة إلى "محذوف"
+        $blind->save();
 
         return redirect()->back()->with('reject', 'تم حذف الكفيف.');
     }
@@ -91,35 +92,38 @@ class AdminController extends Controller
         return view('admin.reports', compact('reports'));
     }
 
-    public function rejectReport($id)
-    {
-
-    // ابحث عن المتطوع بناءً على المعرف
-    $volunteer = Volunteer::findOrFail($id);
-
-    // تحديث حالة البلاغات المرتبطة بالمتطوع
-    Report::where('volunteer_id', $volunteer->id)->update(['status' => 1]); // تغيير الحالة إلى 1
-
-    // حذف المتطوع
-    $volunteer->delete(); // قم بحذف المتطوع من قاعدة البيانات
-
-    return redirect()->back()->with('success', 'تم حذف المتطوع وتحديث حالة البلاغ.');
-    }
-
-    public function deactivate($id) // تعديل الاسم هنا
+    public function rejectReport($volunteerId, $reportId)
     {
         // ابحث عن المتطوع بناءً على المعرف
-        $volunteer = Volunteer::findOrFail($id);
+        $volunteer = Volunteer::findOrFail($volunteerId);
 
-        // تحديث حالة البلاغات المرتبطة بالمتطوع إلى 1
-        Report::where('volunteer_id', $volunteer->id)->update(['status' => 1]); // تغيير حالة البلاغ إلى 1
+        // تحديث حالة البلاغ المرتبط
+        $report = Report::findOrFail($reportId);
+        $report->status = 1; // تغيير الحالة إلى 1
+        $report->save();
+
+        // حذف المتطوع
+        $volunteer->status = 3; // تعيين الحالة إلى "مفعل"
+        $volunteer->save();
+
+        return redirect()->back()->with('success', 'تم حذف المتطوع وتحديث حالة البلاغ.');
+    }
+
+    public function deactivate($volunteerId, $reportId)
+    {
+        // ابحث عن المتطوع بناءً على المعرف
+        $volunteer = Volunteer::findOrFail($volunteerId);
+
+        // تحديث حالة البلاغ المرتبط
+        $report = Report::findOrFail($reportId);
+        $report->status = 1; // تغيير الحالة إلى 1
+        $report->save();
 
         // تحديث حالة المتطوع إلى 0
-        $volunteer->status = 0; // تعيين حالة المتطوع إلى غير مفعل
+        $volunteer->status = 2; // تعيين حالة المتطوع إلى غير مفعل
         $volunteer->availability = 'غير متاح';
         $volunteer->save(); // حفظ التغييرات في قاعدة البيانات
 
         return redirect()->back()->with('success', 'تم تحديث حالة المتطوع وحالة البلاغ بنجاح.');
     }
-
 }

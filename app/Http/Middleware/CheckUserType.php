@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Blind;
 use App\Models\Volunteer;
 use Closure;
 use Illuminate\Http\Request;
@@ -30,6 +31,13 @@ class CheckUserType
          if ($type === 'volunteer') {
             $volunteer = Volunteer::where('user_id', $user->id)->first();
             if (!$volunteer || $volunteer->status != 1) {
+                return redirect('/'); // توجيه إلى الصفحة الرئيسية إذا كانت الحالة غير مفعلّة
+            }
+        }
+
+        if ($type === 'blind') {
+            $blind = Blind::where('user_id', $user->id)->first();
+            if (!$blind || $blind->status != 1) {
                 return redirect('/'); // توجيه إلى الصفحة الرئيسية إذا كانت الحالة غير مفعلّة
             }
         }

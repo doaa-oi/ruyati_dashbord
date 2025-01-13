@@ -22,6 +22,8 @@ class Blind extends Model
         'gender',
         'user_type', // نوع المستخدم: متطوع أو كفيف
         'user_id', // نوع المستخدم: متطوع أو كفيف
+        'status',
+
     ];
     protected $hidden = [
         'password',

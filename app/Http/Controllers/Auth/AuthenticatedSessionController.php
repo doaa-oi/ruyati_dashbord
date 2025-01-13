@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Blind;
 use App\Models\User;
 use App\Models\Volunteer;
 use Illuminate\Http\RedirectResponse;
@@ -51,7 +52,17 @@ class AuthenticatedSessionController extends Controller
                     }
                 }
             } elseif ($user->user_type == 'blind') {
-                return redirect()->route('blinds.index'); // تأكد من وجود route مناسبة
+            // البحث عن الكفيف المرتبط بالمستخدم
+            $blind = Blind::where('user_id', $user->id)->first(); // تأكد من استخدام المفتاح الصحيح
+
+            if ($blind) {
+                // تحقق من حالة الكفيف
+                if ($blind->status == 1) {
+                    return redirect()->route('blinds.index'); // تأكد من وجود route مناسبة
+                } else {
+                    return redirect()->route('landing.master'); // توجيه إلى صفحة أخرى إذا كانت الحالة غير مفعلّة
+                }
+            }
             } elseif ($user->user_type == 'admin') {
                 return redirect()->route('show.volunteers'); // تأكد من وجود route مناسبة
             }

@@ -21,11 +21,12 @@ return new class extends Migration
             $table->string('phone');
             $table->string('gender');
             $table->string('user_type')->default('blind');
+            $table->tinyInteger('status')->default(1); // تغيير نوع العمود إلى tinyInteger مع قيمة افتراضية 0
             $table->timestamps();
             $table->foreignId('user_id')
             ->constrained('users')
             ->onDelete('cascade')   // عند حذف المستخدم، سيتم حذف السجل المقابل في blinds
-            ->onUpdate('cascade'); 
+            ->onUpdate('cascade');
             });
     }
 

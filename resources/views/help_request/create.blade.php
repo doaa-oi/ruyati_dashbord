@@ -6,7 +6,7 @@
     <div class="bg-white py-10 rounded-xl shadow-lg w-full max-w-5xl px-6 lg:px-20">
         <h2 class="text-2xl font-bold mb-10 text-right">إضافة طلب مساعدة</h2>
 
-     @php
+        @php
             // استرجع الكفيف المرتبط بالمستخدم الحالي
             $blind = Auth::user()->blind; // احصل على الكفيف المرتبط بالمستخدم
         @endphp

@@ -73,6 +73,8 @@ class BlindController extends Controller
             'phone' => $request->phone,
             'gender' => $request->gender,
             'user_type' => $request->user_type,
+            'status' => 1,
+
         ]);
         return redirect()->route('blind.index');
 
