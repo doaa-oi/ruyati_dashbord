@@ -22,8 +22,6 @@ class User extends Authenticatable
         'email',
         'password',
         'user_type',
-        'email_verified_at',  // تأكد من تحديثها هنا إذا كنت تريد استخدامها
-        'remember_token',
     ];
 
     /**

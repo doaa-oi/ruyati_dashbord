@@ -125,6 +125,11 @@ Route::middleware(['auth', 'checkUserType:admin'])->group(function () {
     Route::get('/show/report', [AdminController::class, 'showReports'])->name('show.report');
     Route::post('/volunteers/{volunteerId}/deactivate/{reportId}', [AdminController::class, 'deactivate'])->name('volunteers.deactivate');
     Route::post('/volunteers/{volunteerId}/reject-report/{reportId}', [AdminController::class, 'rejectReport'])->name('volunteers.reject.report');
+    Route::get('/show/volunteers/deactivate', [AdminController::class, 'showVolunteersDeactivate'])->name('show.volunteers.deactivate');
+    Route::post('/volunteers/{id}/activate', [AdminController::class, 'activate'])->name('volunteers.activate');
+    Route::get('/blinds/rejected', [AdminController::class, 'showRejectedBlinds'])->name('show.blinds.rejected');
+    Route::get('/volunteers/rejected', [AdminController::class, 'showRejectedVolunteers'])->name('show.volunteers.rejected');
+
 });
 
 // Route::get('volunteer-edit/{id}', [VolunteerController::class,'edit'])->name('volunteer.edit');

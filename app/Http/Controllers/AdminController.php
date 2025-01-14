@@ -17,21 +17,22 @@ class AdminController extends Controller
 
     public function showBlinds(Request $request)
     {
-
-
         $query = $request->input('query');
 
         if ($query) {
-            // البحث عن المتطوعين بالاسم أو المدينة أو نوع المساعدة
-            $blinds = Blind::where('name', 'LIKE', "%{$query}%")
-                ->orWhere('city', 'LIKE', "%{$query}%")
+            // البحث عن الكفيفين بالاسم أو المدينة أو نوع المساعدة، مع التأكد من أن الحالة تساوي 1
+            $blinds = Blind::where('status', 1)
+                ->where(function($queryBuilder) use ($query) {
+                    $queryBuilder->where('name', 'LIKE', "%{$query}%")
+                                 ->orWhere('city', 'LIKE', "%{$query}%");
+                })
                 ->get();
         } else {
-            // إذا لم يكن هناك استعلام، احصل على جميع المتطوعين
-            $blinds = Blind::all();
+            // إذا لم يكن هناك استعلام، احصل على جميع الكفيفين الذين لديهم حالة 1
+            $blinds = Blind::where('status', 1)->get();
         }
-        return view('admin.blind',compact('blinds'));
 
+        return view('admin.blind', compact('blinds'));
     }
 
     public function showVolunteers(Request $request)
@@ -126,4 +127,44 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'تم تحديث حالة المتطوع وحالة البلاغ بنجاح.');
     }
+
+    public function showVolunteersDeactivate(Request $request)
+    {
+
+        $volunteers = Volunteer::where('status', 2)->get();
+        return view('admin.volunteers_deactivate', compact('volunteers'));
+
+    }
+
+    public function activate($volunteerId)
+{
+    // ابحث عن المتطوع بناءً على المعرف
+    $volunteer = Volunteer::findOrFail($volunteerId);
+
+    // تحديث حالة المتطوع إلى 1 (نشط)
+    $volunteer->status = 1; // تعيين حالة المتطوع إلى نشط
+    $volunteer->availability = 'متاح'; // تحديث حالة التوفر
+    $volunteer->save(); // حفظ التغييرات في قاعدة البيانات
+
+    return redirect()->back()->with('success', 'تم تحديث حالة المتطوع وحالة البلاغ بنجاح.');
+}
+
+public function showRejectedBlinds()
+{
+    // الحصول على الكفيفين المرفوضين (الذين لديهم حالة رفض)
+    $blinds = Blind::where('status', 0)->get(); // تأكد من استخدام القيمة الصحيحة للحالة
+
+    // إرجاع عرض مع الكفيفين المرفوضين
+    return view('admin.blinds_rejected', compact('blinds'));
+}
+
+public function showRejectedVolunteers()
+{
+    // الحصول على الكفيفين المرفوضين (الذين لديهم حالة رفض)
+    $volunteers = Volunteer::where('status', 3)->get(); // تأكد من استخدام القيمة الصحيحة للحالة
+
+    // إرجاع عرض مع الكفيفين المرفوضين
+    return view('admin.volunteers_rejected', compact('volunteers'));
+}
+
 }
