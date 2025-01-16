@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blind;
 use App\Models\Report;
+use App\Models\User;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
 
@@ -166,5 +167,39 @@ public function showRejectedVolunteers()
     // إرجاع عرض مع الكفيفين المرفوضين
     return view('admin.volunteers_rejected', compact('volunteers'));
 }
+
+public function showStatistics()
+{
+
+    $volunteers=User::where('user_type','volunteer')->count();
+    $blinds=User::where('user_type','blind')->count();
+
+
+
+
+    $volunteers_statistics = Volunteer::with([
+        'assistances', // لطلبات المساعدة
+        'directAssistances', // للمساعدات المباشرة
+        'reports', // البلاغات
+        'rejectAssistances' // طلبات الرفض
+    ])
+    ->get();
+
+// إنشاء مصفوفة لتخزين إحصائيات كل متطوع
+$statistics = [];
+
+foreach ($volunteers_statistics as $volunteer_statistics) {
+    // إضافة إحصائيات المتطوع
+    $statistics[] = [
+        'name' => $volunteer_statistics->name, // اسم المتطوع
+        'accepted_requests' => $volunteer_statistics->assistances->count() + $volunteer_statistics->directAssistances->count(), // مجموع مساعدات القبول
+        'rejected_requests' => $volunteer_statistics->rejectAssistances->count(), // أعداد الطلبات المرفوضة
+        'reports' => $volunteer_statistics->reports->count(), // أعداد البلاغات
+    ];
+}
+
+    return view('admin.show_statistics', compact('volunteers','blinds','statistics'));
+}
+
 
 }
