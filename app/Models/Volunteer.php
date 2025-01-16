@@ -45,7 +45,7 @@ class Volunteer extends Model
     }
 
 
-    
+
     public function assistances()
     {
         return $this->hasMany(Assistance::class); // تأكد من أن Assistance هو الاسم الصحيح
@@ -65,7 +65,10 @@ class Volunteer extends Model
     {
         return $this->hasMany(RejectAssistance::class); // تأكد من أن RejectAssistance هو الاسم الصحيح
     }
-
+ public function ratings()
+    {
+        return $this->hasMany(Rating::class); // تأكد من أن Report هو الاسم الصحيح
+    }
 }
 
 

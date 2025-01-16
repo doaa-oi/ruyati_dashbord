@@ -30,6 +30,7 @@
                 <th class="py-2 px-4 border-b">المدينة</th>
                 <th class="py-2 px-4 border-b">نوع المساعدة</th>
                 <th class="py-2 px-4 border-b">المواعيد</th>
+                <th class="py-2 px-4 border-b">متوسط التقييمات</th>
                 <th class="py-2 px-4 border-b">العمليات</th>
             </tr>
         </thead>
@@ -53,6 +54,7 @@
                         {{ $volunteer->available_days }} <br>
                         <span class="text-gray-600 text-sm"> {{ $volunteer->available_to }} - {{ $volunteer->available_from }} </span>
                     </td>
+                    <td class="py-2 px-4 border-b">{{ $volunteer->rating }} </td>
                     <td class="py-2 px-4 border-b">
                         <div class="flex items-center justify-between space-x-1">
 

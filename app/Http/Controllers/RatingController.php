@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rating;
+use App\Models\Volunteer;
 use App\Notifications\AssistanceCompletedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +44,15 @@ class RatingController extends Controller
         'rating' => $request->rating,
 
     ]);
+
+
+        // حساب متوسط التقييمات
+        $volunteer = Volunteer::find($request->volunteer_id);
+        $averageRating = $volunteer->ratings()->avg('rating');
+
+        // تحديث حقل rating في جدول المتطوعين
+        $volunteer->rating = $averageRating;
+        $volunteer->save();
 
         // إعادة توجيه مع رسالة نجاح
         return redirect()->back()->with('rating', 'تم التقييم بنجاح.');
