@@ -18,6 +18,15 @@
 </head>
 <body>
 
+
+    @if (session('alert'))
+    <script>
+        window.addEventListener('load', function() {
+            alert("{{ session('alert') }}"); // عرض التنبيه
+        });
+    </script>
+@endif
+
 <div>
 
     @include('landing.navbar')

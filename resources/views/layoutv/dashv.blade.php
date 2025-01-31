@@ -10,6 +10,13 @@
     </div>
 </div>
 @endif
+@if (session('alert'))
+    <script>
+        window.addEventListener('load', function() {
+            alert("{{ session('alert') }}"); // عرض التنبيه
+        });
+    </script>
+@endif
 
 <div class="container grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center justify-center bg-white py-6 border-b border-gray-300 fixed">
 
