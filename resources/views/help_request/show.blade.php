@@ -50,25 +50,35 @@
             </a>
 
 
+<!-- زر تقديم المساعدة -->
+@if($assistanceId) <!-- تحقق من وجود المعرف قبل عرض الزر -->
+    <!-- زر اكتمال المساعدة -->
 
-            <!-- زر تقديم المساعدة -->
-<form action="{{ route('assistance.approve', ['volunteerId' => Auth::user()->volunteer->id, 'blindId' => $help_request->blind->id, 'requestId' => $help_request->id]) }}" method="POST" class="inline-block">
-    @csrf
-    <button type="submit" class="flex items-center justify-center py-3 px-9 bg-customGreen text-white border border-customGreen hover:text-customGreen hover:bg-white rounded-lg font-bold text-sm h-12">
+     <!-- زر تقديم المساعدة معطّل -->
+     <button type="button" class="flex items-center justify-center py-3 px-9 bg-gray-300 text-gray-500 border border-gray-300 rounded-lg font-bold text-sm h-12 opacity-50 cursor-not-allowed" disabled>
         تقديم المساعدة
     </button>
-</form>
 
-<!-- زر اكتمال المساعدة -->
-@if($assistanceId) <!-- تحقق من وجود المعرف قبل عرض الزر -->
-<form action="{{ route('assistance.complete', ['id' => $assistanceId]) }}" method="POST" class="inline-block">
-    @csrf
-    <button type="submit" class="flex items-center justify-center py-3 px-9 bg-blue-600 text-white border border-blue-600 hover:text-blue-600 hover:bg-white rounded-lg font-bold text-sm h-12">
+    <form action="{{ route('assistance.complete', ['id' => $assistanceId]) }}" method="POST" class="inline-block">
+        @csrf
+        <button type="submit" class="flex items-center justify-center py-3 px-9 bg-blue-600 text-white border border-blue-600 hover:text-blue-600 hover:bg-white rounded-lg font-bold text-sm h-12">
+            اكتمال المساعدة
+        </button>
+    </form>
+
+@else
+    <!-- زر تقديم المساعدة متاح -->
+    <form action="{{ route('assistance.approve', ['volunteerId' => Auth::user()->volunteer->id, 'blindId' => $help_request->blind->id, 'requestId' => $help_request->id]) }}" method="POST" class="inline-block">
+        @csrf
+        <button type="submit" class="flex items-center justify-center py-3 px-9 bg-customGreen text-white border border-customGreen hover:text-customGreen hover:bg-white rounded-lg font-bold text-sm h-12">
+            تقديم المساعدة
+        </button>
+    </form>
+
+    <!-- زر اكتمال المساعدة معطّل -->
+    <button type="button" class="flex items-center justify-center py-3 px-9 bg-gray-300 text-gray-500 border border-gray-300 rounded-lg font-bold text-sm h-12 opacity-50 cursor-not-allowed" disabled>
         اكتمال المساعدة
     </button>
-</form>
-@else
-    <p>لم يتم تقديم طلب مساعدة لك بعد.</p> <!-- رسالة إن كان لا يوجد مساعدات -->
 @endif
             {{-- <a id="helpButton" href="" class="flex items-center justify-center py-3 px-9 bg-customGreen text-white border border-customGreen hover:text-customGreen hover:bg-white rounded-lg font-bold text-sm h-12" onclick="handleButtonClick()"> تقديم المساعدة </a> --}}
 
