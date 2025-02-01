@@ -6,7 +6,9 @@ use App\Models\Blind;
 use App\Models\DirectAssistance;
 use App\Models\RejectAssistance;
 use App\Models\Volunteer;
+use App\Notifications\ApprovedNotification;
 use App\Notifications\AssistanceCompletedNotification;
+use App\Notifications\RejectionNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
@@ -29,6 +31,8 @@ class DirectAssistanceController extends Controller
 
         // تحديث حالة المتطوع
         $volunteer->update(['availability' => 'غير متاح']);
+
+        Notification::send($blind, new ApprovedNotification($volunteer->id, $volunteer->name));
 
         return redirect()->back()->with('success', 'تمت الموافقة على طلب المساعدة بنجاح.');
     }
@@ -72,6 +76,7 @@ class DirectAssistanceController extends Controller
         ]);
 
         // يمكنك إضافة منطق إضافي هنا إذا أردت
+        Notification::send($blind, new RejectionNotification($volunteer->id, $volunteer->name));
 
         return redirect()->back()->with('rejection', 'تم رفض طلب المساعدة.'); // رسالة تؤكد الرفض
     }

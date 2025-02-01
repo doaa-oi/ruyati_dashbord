@@ -6,6 +6,7 @@ use App\Models\Assistance;
 use App\Models\Blind;
 use App\Models\HelpRequest;
 use App\Models\Volunteer;
+use App\Notifications\ApprovedNotification;
 use App\Notifications\AssistanceCompletedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
@@ -31,6 +32,9 @@ class AssistanceController extends Controller
     $volunteer = Volunteer::findOrFail($volunteerId); // استرجاع معلومات المتطوع
     $volunteer->update(['availability' => 'غير متاح']); // تأكد من أن لديك حقل لتحديد حالة التوفر
 
+    $blind = Blind::findOrFail($blindId);
+
+    Notification::send($blind, new ApprovedNotification($volunteer->id, $volunteer->name));
 
         return redirect()->back()->with('success', 'تمت الموافقة على طلب المساعدة بنجاح.');
     }

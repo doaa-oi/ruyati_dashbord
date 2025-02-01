@@ -113,17 +113,18 @@
 
 </div>
 <h1>إشعاراتك</h1>
-@if (isset($notifications) && $notifications->isEmpty()) <!-- يتحقق من وجود إشعارات غير مقروءة -->
+@if (isset($notifications) && $notifications->isEmpty())
     <p>لا توجد إشعارات حالياً.</p>
 @else
     @foreach ($notifications as $notification)
-        @if (is_null($notification->read_at)) <!-- تحقق مما إذا كانت الإشعار غير مقروء -->
+        @if (is_null($notification->read_at) &&
+               $notification->type === 'App\\Notifications\\AssistanceCompletedNotification') <!-- تحقق من نوع الإشعار -->
             @php
                 // تحويل نص JSON إلى مصفوفة
                 $data = json_decode($notification->data, true);
             @endphp
 
-
+            
         <div class="fixed inset-0 bg-black opacity-50 backdrop"></div>
 
         <div class="flex items-center justify-center h-screen -mt-96"> <!-- الحاوية الأساسية -->

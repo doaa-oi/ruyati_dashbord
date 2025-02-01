@@ -24,7 +24,21 @@ class BlindController extends Controller
     {
         $volunteers=Volunteer::all();
         //return $volunteers;
-        return view('layout.index',compact('volunteers'));
+
+        $blind = Auth::user()->blind;
+
+        // تحديد الأنواع التي ترغب في الحصول على الإشعارات لها
+        $types = [
+            'App\Notifications\ApprovedNotification',
+            'App\Notifications\RejectionNotification'
+        ];
+
+        // الحصول على الإشعارات غير المقروءة من النوع المحدد للكفيف المرتبط بالمستخدم
+        $blind = $blind->notifications()
+                                ->whereIn('type', $types)
+                                ->get();
+
+        return view('layout.index',compact('volunteers','blind'));
     }
 
     /**
