@@ -70,7 +70,7 @@ class BlindController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'user_type' => $request->user_type,
-            'password' => Hash::make($request->password), // تجزئة كلمة المرور
+            'password' => $request->password, // حفظ كلمة المرور كنص عادي
             'email_verified_at' => now(), // تعيين الوقت الحالي
             'remember_token' => Str::random(60), // تعيين قيمة عشوائية
         ]);
@@ -81,7 +81,7 @@ class BlindController extends Controller
             'user_id' => $user->id, // احفظ معرف المستخدم
             'name' => $request->name, // استخدم input() للحصول على القيمة
             'email' => $request->email,
-            'password' => Hash::make($request->password), // تجزئة كلمة المرور
+            'password' => $request->password,
             'age' => $request->age,
             'city' => $request->city,
             'phone' => $request->phone,

@@ -29,7 +29,7 @@ class StoreVolunteerRequest extends FormRequest
             'city' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'national_id' => 'required|string|max:20',
-            'gender' => 'required|string|in:ذكر,انثى', // Select option
+            'gender' => 'required|string|in:ذكر,أنثى', // Select option
             'assistance_type' => 'required|string', // Select option
             'available_days' => 'required|array', // Checkboxes
             'available_from' => 'required|string', // Select option

@@ -62,7 +62,8 @@ class VolunteerController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'user_type' => $request->user_type,
-            'password' => Hash::make($request->password), // تجزئة كلمة المرور
+//            'password' => Hash::make($request->password), // تجزئة كلمة المرور
+            'password' => $request->password,
             'email_verified_at' => now(), // تعيين الوقت الحالي
             'remember_token' => Str::random(60), // تعيين قيمة عشوائية
         ]);
@@ -73,7 +74,8 @@ class VolunteerController extends Controller
             'user_id' => $user->id, // احفظ معرف المستخدم هنا
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password), // Directly use $request->password
+            //'password' => Hash::make($request->password), // Directly use $request->password
+            'password' => $request->password,
             'age' => $request->age,
             'city' => $request->city,
             'phone' => $request->phone,

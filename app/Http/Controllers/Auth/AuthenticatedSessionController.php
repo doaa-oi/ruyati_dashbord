@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if ($user && Hash::check($request->password, $user->password)) {
+        if ($user && $request->password === $user->password) {
             Auth::login($user); // تسجيل الدخول للمستخدم
 
             // توجيه المستخدم حسب نوعه

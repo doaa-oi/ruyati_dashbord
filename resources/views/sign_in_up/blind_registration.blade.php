@@ -105,7 +105,7 @@
         <select  id="gender" name="gender" tabindex="0" class="navigable bg-green-50 border border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block h-11 w-56 p-2.5 " >
           <option value="" selected disabled>اختر الجنس </option>
           <option value="ذكر" tabindex="0" class="navigable ">ذكر</option>
-          <option value="انثى" tabindex="0" class="navigable ">انثى</option>
+          <option value="أنثى" tabindex="0" class="navigable ">أنثى</option>
         </select>
         @error('gender')
         <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
