@@ -4,7 +4,7 @@
 
 @if(session()->has('success')) <!-- إضافة تنبيه للتعديل -->
 <div class="bg-blue-800 text-center py-4 lg:px-4">
-    <div class="p-2 bg-blue-700 items-center text-blue-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+    <div tabindex="0" class="navigable p-2 bg-blue-700 items-center text-blue-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
       <span class="flex rounded-full bg-blue-400 uppercase px-2 py-1 text-xs font-bold mr-3">تعديل</span>
       <span class="font-semibold mr-2 text-left text-sm flex-auto">{{ session()->get('success') }}</span>
     </div>
@@ -14,14 +14,14 @@
 <div class="container grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center justify-center bg-white py-6 border-b border-gray-300 fixed">
 
     <div class="ml-48 p-1">
-        <label for="simple-search" class=" text-2xl font-bold text-black ">  المتطوعين </label>
+        <label for="simple-search" title="هذه الواجهة تعرض معلومات " tabindex="0" class="navigable text-2xl font-bold text-black ">  المتطوعين </label>
 
     </div>
 
 <div class="justify-items-center ">
 
             <form action="{{ route('search.volunteers') }}" method="GET" class="flex w-full">
-        <input type="text" name="query" class="w-80 bg-green-50 border border-customGreen text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-customGreen block p-2.5" placeholder="ابحث عن المتطوعين بالاسم، المدينة، أو التخصص" required />
+        <input  type="text" name="query" title="هذا حقل البحث عن المتطوعين بالاسم أو المدينة أو التخصص" tabindex="0" class="navigable w-80 bg-green-50 border border-customGreen text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-customGreen block p-2.5" placeholder="ابحث عن المتطوعين بالاسم، المدينة، أو التخصص" required />
         <button type="submit" class="p-3 ms-2 text-sm font-medium text-white bg-customGreen rounded-lg border border-customGreen hover:bg-white hover:text-customGreen focus:ring-4 focus:outline-none focus:ring-customGreen ">
             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
@@ -32,7 +32,7 @@
 </div>
 
 <div class="justify-items-center">
-    <a href="{{ route('help.request.create') }}" class="flex items-center p-2.5 ms-2 text-sm font-medium text-white bg-customGreen rounded-lg border border-customGreen group hover:bg-white hover:text-customGreen focus:ring-4 focus:outline-none focus:ring-customGreen">
+    <a href="{{ route('help.request.create') }}" tabindex="0" class="navigable flex items-center p-2.5 ms-2 text-sm font-medium text-white bg-customGreen rounded-lg border border-customGreen group hover:bg-white hover:text-customGreen focus:ring-4 focus:outline-none focus:ring-customGreen">
         <svg class="w-4 h-4 mr-2 ml-2 text-white group-hover:text-customGreen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 208H272V64c0-17.7-14.3-32-32-32h-32c-17.7 0-32 14.3-32 32v144H32c-17.7 0-32 14.3-32 32v32c0 17.7 14.3 32 32 32h144v144c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V304h144c17.7 0 32-14.3 32-32v-32c0-17.7-14.3-32-32-32z"/></svg>
         إضافة طلب مساعدة
     </a>
@@ -44,11 +44,11 @@
 
     @if($volunteers->isEmpty())
     <div class="text-center">
-        <p>لا يوجد أشخاص مطابقون للبحث.</p>
+        <p tabindex="0" class="navigable" >لا يوجد أشخاص مطابقون للبحث.</p>
     </div>
 @else
     @foreach($volunteers as $volunteer)
-    <div class="container grid grid-cols-1 md:grid-cols-2 mx-auto p-8 bg-white rounded-2xl ">
+    <div tabindex="0" class="navigable container grid grid-cols-1 md:grid-cols-2 mx-auto p-8 bg-white rounded-2xl ">
         <div class="flex">
             <img class="object-cover h-32 w-32 rounded-lg border border-customGreen" src="{{ asset('images/profile.png') }}" alt="">
         </div>
@@ -84,7 +84,7 @@
         </div>
 
         <div class="col-span-2 flex justify-center justify-items-center mt-4">
-            <a href="{{ route('showvolunteer.profile', Crypt::encrypt($volunteer->id)) }}" class="text-center py-2 bg-customGreen text-white border border-customGreen hover:bg-white hover:text-customGreen rounded-lg font-bold text-sm w-full h-10">عرض الملف الشخصي</a>
+            <a href="{{ route('showvolunteer.profile', Crypt::encrypt($volunteer->id)) }}" tabindex="0" class="navigable text-center py-2 bg-customGreen text-white border border-customGreen hover:bg-white hover:text-customGreen rounded-lg font-bold text-sm w-full h-10">عرض الملف الشخصي</a>
         </div>
     </div>
 

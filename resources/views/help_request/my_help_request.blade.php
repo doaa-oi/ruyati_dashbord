@@ -4,7 +4,7 @@
 
 @if(session()->has('success'))
 <div class="bg-green-800 text-center py-4 lg:px-4">
-    <div class="p-2 bg-green-700 items-center text-green-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+    <div tabindex="0" class="navigable p-2 bg-green-700 items-center text-green-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
       <span class="flex rounded-full bg-green-400 uppercase px-2 py-1 text-xs font-bold mr-3">نجاح</span>
       <span class="font-semibold mr-2 text-left text-sm flex-auto">{{ session()->get('success') }}</span>
     </div>
@@ -13,7 +13,7 @@
 
 @if(session()->has('delete'))  <!-- استخدام 'error' للخطأ -->
 <div class="bg-red-800 text-center py-4 lg:px-4">
-    <div class="p-2 bg-red-700 items-center text-red-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+    <div tabindex="0" class="navigable p-2 bg-red-700 items-center text-red-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
       <span class="flex rounded-full bg-red-400 uppercase px-2 py-1 text-xs font-bold mr-3">خطأ</span>
       <span class="font-semibold mr-2 text-left text-sm flex-auto">{{ session()->get('delete') }}</span>
     </div>
@@ -22,7 +22,7 @@
 
 @if(session()->has('update')) <!-- إضافة تنبيه للتعديل -->
 <div class="bg-blue-800 text-center py-4 lg:px-4">
-    <div class="p-2 bg-blue-700 items-center text-blue-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+    <div tabindex="0" class="navigable p-2 bg-blue-700 items-center text-blue-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
       <span class="flex rounded-full bg-blue-400 uppercase px-2 py-1 text-xs font-bold mr-3">تعديل</span>
       <span class="font-semibold mr-2 text-left text-sm flex-auto">{{ session()->get('update') }}</span>
     </div>
@@ -35,8 +35,8 @@
 
 
 <div class="container flex justify-between items-center pt-8 px-3">
-    <h1 class="text-xl font-bold ">طلباتي</h1>
-    <a class="flex justify-center items-center flex-shrink-0 h-14  w-56 text-sm font-bold rounded hover:bg-customGreen hover:text-white bg-none text-customGreen" href="{{ route('help.request.create') }}">
+    <h1 title="هذه واجهة الطلبات الخاصة بي" tabindex="0" class="navigable text-xl font-bold ">طلباتي</h1>
+    <a tabindex="0" class="navigable flex justify-center items-center flex-shrink-0 h-14  w-56 text-sm font-bold rounded hover:bg-customGreen hover:text-white bg-none text-customGreen" href="{{ route('help.request.create') }}">
         <svg class="w-4 h-4 mr-2 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 208H272V64c0-17.7-14.3-32-32-32h-32c-17.7 0-32 14.3-32 32v144H32c-17.7 0-32 14.3-32 32v32c0 17.7 14.3 32 32 32h144v144c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V304h144c17.7 0 32-14.3 32-32v-32c0-17.7-14.3-32-32-32z"/></svg>
         إضافة طلب مساعدة
     </a>
@@ -47,7 +47,7 @@
 
 
     @foreach ($help_requests as $help_request)
-        <div class="bg-white border border-gray-200 rounded-2xl shadow p-4 dark:bg-gray-800 dark:border-gray-700">
+        <div tabindex="0" class="navigable bg-white border border-gray-200 rounded-2xl shadow p-4 dark:bg-gray-800 dark:border-gray-700">
         <a href="#">
           <img class="rounded-t-lg w-full" src="/docs/images/blog/image-1.jpg" alt="" />
         </a>
@@ -62,13 +62,13 @@
 
           <p class="mb-3 text-lg text-gray-700 dark:text-gray-400">{{ $help_request->description }}</p>
           <div class="flex gap-5">
-            <a href="{{ route('help.request.edit', ['encryptedId' => Crypt::encrypt($help_request->id)]) }}" class="items-center flex-grow px-3 py-3 text-sm font-bold text-center text-white bg-customGreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-customGreen dark:hover:bg-green-700 dark:focus:ring-green-800">
+            <a href="{{ route('help.request.edit', ['encryptedId' => Crypt::encrypt($help_request->id)]) }}" tabindex="0" class="navigable items-center flex-grow px-3 py-3 text-sm font-bold text-center text-white bg-customGreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-customGreen dark:hover:bg-green-700 dark:focus:ring-green-800">
                 تعديل
             </a>
             <form action="{{ route('help.request.destroy', $help_request->id) }}" method="POST" class="flex-grow inline-block">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="items-center w-full px-3 py-3 text-sm font-bold text-center text-customGreen bg-none border-2 border-customGreen rounded-lg hover:bg-customGreen hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                <button type="submit" tabindex="0" class="navigable items-center w-full px-3 py-3 text-sm font-bold text-center text-customGreen bg-none border-2 border-customGreen rounded-lg hover:bg-customGreen hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                     حذف
                 </button>
             </form>

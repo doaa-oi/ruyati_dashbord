@@ -20,14 +20,14 @@
                     <div class="flex gap-x-7 ml-5">
                         @auth
                             <span class="text-customGreen text-l"> {{ auth()->user()->name }}</span>
-                            <a href="{{ route('logout') }}" class="flex-none text-customGreen text-l"
+                            <a href="{{ route('logout') }}" tabindex="0" class="navigable flex-none text-customGreen text-l"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">تسجيل الخروج</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                                 @csrf
                             </form>
                         @else
-                            <a href="{{ route('login') }}" class="flex-none text-customGreen text-l">تسجيل الدخول</a>
-                            <a href="/select" class="flex-initial text-customGreen text-l">التسجيل</a>
+                            <a href="{{ route('login') }}" tabindex="0" class="navigable flex-none text-customGreen text-l">تسجيل الدخول</a>
+                            <a href="/select" tabindex="0" class="navigable flex-initial text-customGreen text-l">التسجيل</a>
                         @endauth
                     </div>
                 </div>

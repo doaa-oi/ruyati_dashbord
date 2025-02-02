@@ -7,7 +7,7 @@
 
 @section('title2')
 
-<h1 class="text-center mb-16 text-3xl font-bold text-green-500"><span class="text-black">انشىء</span> حسابك الآن</h1>
+<h1 tabindex="0" class="navigable text-center mb-16 text-3xl font-bold text-green-500"><span class="text-black">انشىء</span> حسابك الآن</h1>
 
 @endsection
 
@@ -34,11 +34,12 @@
           type="text"
           id="name"
           name="name"
-          class="text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
+          title="الاسم بالكامل"
+          tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder="أدخل الاسم بالكامل"
            />
            @error('name')
-           <p class="" style="color: red">{{ $message }}</p>
+           <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
            @enderror
       </div>
 
@@ -48,11 +49,12 @@
           type="email"
           id="email"
           name="email"
-          class="text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
+          title="البريد الإلكتروني"
+          tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder="البريد الإلكتروني"
            />
            @error('email')
-           <p class="" style="color: red">{{ $message }}</p>
+           <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
            @enderror
       </div>
        <div class="">
@@ -61,11 +63,12 @@
           type="text"
           id="age"
           name="age"
-          class="text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
+          title=" العمر "
+          tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder=" العمر "
            />
            @error('age')
-           <p class="" style="color: red">{{ $message }}</p>
+           <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
            @enderror
       </div>
        <div class="">
@@ -74,11 +77,12 @@
           type="text"
           id="city"
           name="city"
-          class="text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
+          title=" المدينة "
+          tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder=" المدينة "
            />
            @error('city')
-           <p class="" style="color: red">{{ $message }}</p>
+           <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
            @enderror
       </div>
        <div class="">
@@ -87,23 +91,24 @@
           type="text"
           id="phone"
           name="phone"
-          class="text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
+          title=" رقم الهاتف "
+          tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder=" رقم الهاتف "
            />
            @error('phone')
-           <p class="" style="color: red">{{ $message }}</p>
+           <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
            @enderror
       </div>
 
       <div>
         <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 ">الجنس</label>
-        <select  id="gender" name="gender" class="bg-green-50 border border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block h-11 w-56 p-2.5 " >
+        <select  id="gender" name="gender" tabindex="0" class="navigable bg-green-50 border border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block h-11 w-56 p-2.5 " >
           <option value="" selected disabled>اختر الجنس </option>
-          <option value="ذكر">ذكر</option>
-          <option value="انثى">انثى</option>
+          <option value="ذكر" tabindex="0" class="navigable ">ذكر</option>
+          <option value="انثى" tabindex="0" class="navigable ">انثى</option>
         </select>
         @error('gender')
-        <p class="" style="color: red">{{ $message }}</p>
+        <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
         @enderror
     </div>
 
@@ -113,11 +118,12 @@
           type="password"
           id="password"
           name="password"
-          class="text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
+        title="كلمة المرور"
+         tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder=" *********  "
            />
            @error('password')
-           <p class="" style="color: red">{{ $message }}</p>
+           <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
            @enderror
       </div>
        <div class="">
@@ -126,11 +132,12 @@
           type="password"
           id="password_confirmation"
           name="password_confirmation"
-          class="text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
+          title="تأكيد كلمة المرور"
+          tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder=" *********"
            />
            @error('password_confirmation')
-           <p class="" style="color: red">{{ $message }}</p>
+           <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
            @enderror
       </div>
 
@@ -152,15 +159,15 @@
 
     <div>
             <button
-            class="inline-block shrink-0 rounded-md border border-green-700 bg-green-600 px-12 py-3 text-l font-medium text-white transition hover:bg-transparent hover:text-green-500 focus:outline-none focus:ring active:text-green-500 h-12 w-80">
+            tabindex="0" class="navigable inline-block shrink-0 rounded-md border border-green-700 bg-green-600 px-12 py-3 text-l font-medium text-white transition hover:bg-transparent hover:text-green-500 focus:outline-none focus:ring active:text-green-500 h-12 w-80">
             حفظ
         </button>
     </div>
 
     <div>
-    <p class="mt-4 text-sm text-gray-500 sm:mt-0">
+    <p tabindex="0" class="navigable mt-4 text-sm text-gray-500 sm:mt-0">
         هل لديك حساب بالفعل؟
-        <a href="/login" class="text-green-500 underline">تسجيل الدخول</a>
+        <a href="/login" tabindex="0" class="navigable text-green-500 underline">تسجيل الدخول</a>
     </p>
     </div>
 

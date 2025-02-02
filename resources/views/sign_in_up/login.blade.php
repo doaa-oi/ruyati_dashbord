@@ -54,29 +54,29 @@
     <!-- Email Address -->
     <div class="mb-5">
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">البريد الإلكتروني</label>
-        <input type="email" id="email" class="bg-gray-50 border-2 border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 w-96" name="email" required autofocus placeholder="البريد الإلكتروني" />
+        <input type="email" id="email" title=" البريد الإلكتروني" tabindex="0" class="navigable bg-gray-50 border-2 border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 w-96" name="email" required autofocus placeholder="البريد الإلكتروني" />
         @error('email')
-        <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
+        <span tabindex="0" class="navigable text-red-600 text-sm mt-1">{{ $message }}</span>
         @enderror
     </div>
 
     <!-- Password -->
     <div class="mb-8 mt-8">
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">كلمة المرور</label>
-        <input type="password" id="password" class="bg-gray-50 border-2 border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 w-96" name="password" required autocomplete="current-password" placeholder="كلمة المرور" />
+        <input type="password" id="password" title=" كلمة المرور" tabindex="0" class="navigable bg-gray-50 border-2 border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 w-96" name="password" required autocomplete="current-password" placeholder="كلمة المرور" />
         @error('password')
-        <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
+        <span tabindex="0" class="navigable text-red-600 text-sm mt-1">{{ $message }}</span>
         @enderror
     </div>
 
 
 
-    <button type="submit" class="shadow-xl shadow-gray-500	 text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm   py-2.5 text-center mb-4 mt-6 w-60 mr-16 h-11">تسجيل الدخول</button>
+    <button type="submit" tabindex="0" class="navigable text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm   py-2.5 text-center mb-4 mt-6 w-60 mr-16 h-11">تسجيل الدخول</button>
 
-    <div class="mr-24">
+    <div tabindex="0" class="navigable mr-24">
         <p class="text-sm text-gray-500 sm:mt-0">
             ليس لديك حساب؟
-            <a href="/select" class="text-green-500 underline">إنشاء حساب</a>
+            <a href="/select" tabindex="0" class="navigable text-green-500 underline">إنشاء حساب</a>
         </p>
 
     </div>

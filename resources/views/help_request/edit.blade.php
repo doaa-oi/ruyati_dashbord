@@ -4,7 +4,7 @@
 
 <div class="bg-gray-100 flex items-center justify-center min-h-screen ">
     <div class="bg-white py-10 rounded-xl shadow-lg w-full max-w-5xl px-6 lg:px-20">
-        <h2 class="text-2xl font-bold mb-10 text-right">تعديل طلب مساعدة</h2>
+        <h2 tabindex="0" class="navigable text-2xl font-bold mb-10 text-right">تعديل طلب مساعدة</h2>
 
         <form action="{{ route('help.request.update') }}" method="POST">
             @csrf
@@ -19,10 +19,11 @@
                     type="text"
                     id="title"
                     name="title"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
+                    title="عنوان الطلب"
+                    tabindex="0" class="navigable w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
                     >
                 @error('title')
-                <p class="" style="color: red">{{ $message }}</p>
+                <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -31,17 +32,18 @@
                 <textarea id="description"
                  name="description"
                   rows="4"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
+                  title="تفاصيل الطلب"
+                  tabindex="0" class="navigable w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
                     style="resize: none;">{{ $help_request->description }}</textarea>
                 @error('description')
-                <p class="" style="color: red">{{ $message }}</p>
+                <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="mb-4">
                 <label for="location_url" class="text-lg font-bold text-gray-700">الموقع</label><br>
                 <div class="flex items-center mt-2">
-                    <button id="locationBtn" type="button" class="inline-block shrink-0 border border-customGreen bg-customGreen text-l font-medium text-white transition hover:bg-transparent hover:text-customGreen focus:outline-none focus:ring active:text-green-500 py-2 px-16 rounded-lg h-11">
+                    <button id="locationBtn" type="button" tabindex="0" class="navigable inline-block shrink-0 border border-customGreen bg-customGreen text-l font-medium text-white transition hover:bg-transparent hover:text-customGreen focus:outline-none focus:ring active:text-green-500 py-2 px-16 rounded-lg h-11">
                         تحديد موقعي
                     </button>
                     <input
@@ -54,12 +56,12 @@
                     >
                 </div>
                 @error('location_url')
-                    <p class="" style="color: red">{{ $message }}</p>
+                    <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="flex justify-center">
-                <button type="submit" class="w-60 my-6 text-lg font-bold bg-customGreen text-white py-3 rounded-lg hover:bg-white hover:text-customGreen border-2 border-customGreen focus:outline-none focus:ring-2 focus:ring-green-400">تعديل</button>
+                <button type="submit" tabindex="0" class="navigable w-60 my-6 text-lg font-bold bg-customGreen text-white py-3 rounded-lg hover:bg-white hover:text-customGreen border-2 border-customGreen focus:outline-none focus:ring-2 focus:ring-green-400">تعديل</button>
             </div>
         </form>
     </div>

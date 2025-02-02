@@ -64,8 +64,9 @@ class HelpRequestController extends Controller
         $blind = Auth::user()->blind;
 
         // احصل على طلبات المساعدة الخاصة بالمستخدم المسجل دخوله
-        $help_requests = HelpRequest::where('user_id', $blind->id)->get();
-
+        $help_requests = HelpRequest::where('user_id', $blind->id)
+        ->where('status', 'معلق') // إضافة شرط الحالة
+        ->get();
         // أعد عرض الطلبات في عرض
         return view('help_request.my_help_request', compact('help_requests'));
     }

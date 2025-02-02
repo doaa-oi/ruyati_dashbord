@@ -44,6 +44,7 @@
       </main>
 
   </section>
+  <script src="{{ asset('js/keydown.js') }}"></script>
 
 </body>
 </html>
