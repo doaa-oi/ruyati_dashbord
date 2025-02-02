@@ -41,21 +41,29 @@ class HelpRequestController extends Controller
        return view('layoutv.allposts', compact('help_requests'));
    }
 
-   public function inProgressRequests()
-   {
+    public function inProgressRequests()
+    {
+        // احصل على معرف المتطوع الحالي
+        $volunteerId = Auth::user()->volunteer->id; // يجب أن يكون للمتطوع معرف مرتبط في الجلسة
 
-    $assistanceID = DirectAssistance::where('status', 'قيد التنفيذ')
-    ->pluck('blind_id'); // جمع معرفات المكفوفين
+        // جمع معرفات المكفوفين من المساعدات الحالية التي تخص المتطوع الحالي
+        $assistanceIDs = DirectAssistance::where('status', 'قيد التنفيذ')
+            ->where('volunteer_id', $volunteerId) // تأكد من أن المتطوع الحالي هو المستهدف
+            ->pluck('blind_id'); // جمع معرفات المكفوفين
 
-    $blinds = Blind::whereIn('id', $assistanceID)->get();
+        // جمع بيانات المكفوفين بناءً على المعرفات
+        $blinds = Blind::whereIn('id', $assistanceIDs)->get();
 
-       // استرجاع طلبات المساعدة التي تحمل الحالة "قيد التنفيذ"
-       $help_requests = HelpRequest::with('blind') // تحميل العلاقة مع الكفيف
-       ->where('status', 'قيد التنفيذ')
-       ->get();
-       // إعادة عرض الطلبات في واجهة جديدة
-       return view('layoutv.myposts', compact('help_requests','blinds'));
-   }
+        $assistances = Assistance::where('volunteer_id', $volunteerId)
+            ->pluck('help_request_id');
+
+        $help_requests = HelpRequest::whereIn('id', $assistances)
+            ->where('status', 'قيد التنفيذ')
+            ->get();
+
+        // عرض الطلبات
+        return view('layoutv.myposts', compact('help_requests', 'blinds'));
+    }
 
 
     public function userRequests()
