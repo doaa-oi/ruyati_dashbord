@@ -62,6 +62,6 @@ class AssistanceController extends Controller
        // $blind->notify(new AssistanceCompletedNotification($assistance));
         Notification::send($blind, new AssistanceCompletedNotification($volunteer->id, $volunteer->name,$assistance));
 
-        return redirect()->back()->with('success', 'تم اكتمال المساعدة بنجاح.');
+        return redirect()->route('volunteers.index')->with('success', 'تم اكمال المساعدة بنجاح.');
     }
 }

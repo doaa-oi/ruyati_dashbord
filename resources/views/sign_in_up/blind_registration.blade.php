@@ -35,6 +35,7 @@
           id="name"
           name="name"
           title="الاسم بالكامل"
+          value="{{ old('name') }}"
           tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder="أدخل الاسم بالكامل"
            />
@@ -50,6 +51,7 @@
           id="email"
           name="email"
           title="البريد الإلكتروني"
+          value="{{ old('email') }}"
           tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder="البريد الإلكتروني"
            />
@@ -64,6 +66,7 @@
           id="age"
           name="age"
           title=" العمر "
+          value="{{ old('age') }}"
           tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder=" العمر "
            />
@@ -78,6 +81,7 @@
           id="city"
           name="city"
           title=" المدينة "
+          value="{{ old('city') }}"
           tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder=" المدينة "
            />
@@ -92,6 +96,7 @@
           id="phone"
           name="phone"
           title=" رقم الهاتف "
+          value="{{ old('phone') }}"
           tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder=" رقم الهاتف "
            />
@@ -103,9 +108,9 @@
       <div>
         <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 ">الجنس</label>
         <select  id="gender" name="gender" tabindex="0" class="navigable bg-green-50 border border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block h-11 w-56 p-2.5 " >
-          <option value="" selected disabled>اختر الجنس </option>
-          <option value="ذكر" tabindex="0" class="navigable ">ذكر</option>
-          <option value="أنثى" tabindex="0" class="navigable ">أنثى</option>
+            <option value="" {{ old('gender') == null ? 'selected' : '' }} disabled>اختر الجنس</option>
+            <option value="ذكر" {{ old('gender') == 'ذكر' ? 'selected' : '' }} tabindex="0" class="navigable">ذكر</option>
+            <option value="أنثى" {{ old('gender') == 'أنثى' ? 'selected' : '' }} tabindex="0" class="navigable">أنثى</option>
         </select>
         @error('gender')
         <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
@@ -119,6 +124,7 @@
           id="password"
           name="password"
         title="كلمة المرور"
+        value="{{ old('password') }}"
          tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder=" *********  "
            />
@@ -133,6 +139,7 @@
           id="password_confirmation"
           name="password_confirmation"
           title="تأكيد كلمة المرور"
+          value="old('password_confirmation')"
           tabindex="0" class="navigable text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm mt-2 mb-5"
           placeholder=" *********"
            />

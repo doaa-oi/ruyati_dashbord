@@ -112,9 +112,9 @@
 
 
 </div>
-<h1>إشعاراتك</h1>
+<h1></h1>
 @if (isset($notifications) && $notifications->isEmpty())
-    <p>لا توجد إشعارات حالياً.</p>
+    <p></p>
 @else
     @foreach ($notifications as $notification)
         @if (is_null($notification->read_at) &&

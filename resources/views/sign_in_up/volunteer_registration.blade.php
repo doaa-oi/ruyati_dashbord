@@ -33,6 +33,7 @@
           type="text"
           id="name"
           name="name"
+          value="{{ old('name') }}"
           class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
           placeholder="أدخل الاسم بالكامل"
            />
@@ -47,6 +48,7 @@
           type="email"
           id="email"
           name="email"
+          value="{{ old('email') }}"
           class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
           placeholder="البريد الإلكتروني"
            />
@@ -61,6 +63,7 @@
           type="text"
           id="age"
           name="age"
+          value="{{ old('age') }}"
           class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
           placeholder=" العمر "
            />
@@ -75,6 +78,7 @@
           type="text"
           id="city"
           name="city"
+          value="{{ old('city') }}"
           class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
           placeholder=" المدينة "
            />
@@ -89,6 +93,7 @@
           type="text"
           id="phone"
           name="phone"
+          value="{{ old('phone') }}"
           class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
           placeholder=" رقم الهاتف "
            />
@@ -103,6 +108,7 @@
           type="text"
           id="national_id"
           name="national_id"
+          value="{{ old('national_id') }}"
           class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
           placeholder=" الرقم الوطني "
            />
@@ -114,6 +120,7 @@
           type="password"
           id="password"
           name="password"
+          value="{{ old('password') }}"
           class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
           placeholder=" *********  "
            />
@@ -128,6 +135,7 @@
           type="password"
           id="password_confirmation"
           name="password_confirmation"
+          value="{{ old('password_confirmation') }}"
           class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
           placeholder=" *********"
            />
@@ -139,9 +147,9 @@
       <div>
         <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 ">الجنس</label>
         <select  id="gender" name="gender" class="bg-green-50 border border-customGreen text-gray-900 text-sm rounded-lg focus:ring-customGreen focus:border-customGreen block h-11 w-64 p-2.5 " >
-          <option value="" selected disabled>اختر الجنس </option>
-          <option value="ذكر">ذكر</option>
-          <option value="أنثى">أنثى</option>
+            <option value="" disabled {{ old('gender') ? '' : 'selected' }}>اختر الجنس</option>
+            <option value="ذكر" {{ old('gender') == 'ذكر' ? 'selected' : '' }}>ذكر</option>
+            <option value="أنثى" {{ old('gender') == 'أنثى' ? 'selected' : '' }}>أنثى</option>
         </select>
         @error('gender')
         <p class="" style="color: red">{{ $message }}</p>
@@ -151,16 +159,21 @@
       <div>
         <label for="assistance_type" class="block mb-2 text-sm font-medium text-gray-900 ">نوع المساعدة</label>
         <select  id="assistance_type" name="assistance_type" class="bg-green-50 border border-customGreen text-gray-900 text-sm rounded-lg focus:ring-customGreen focus:border-customGreen block  p-2.5 h-11 w-64">
-            <option value="" selected disabled>اختر نوع المساعدة</option>
-            <option value="القراءة والكتابة" class=" hover:bg-customGreen">القراءة والكتابة</option>
-            <option value="التنقل">التنقل</option>
-          <option value="التكنولوجيا">التكنولوجيا</option>
-          <option value="الرياضة والترفيه">الرياضة والترفيه</option>
-          <option value="التعليم والتدريب">التعليم والتدريب</option>
-          <option value="الصحة">الصحة</option>
-          <option value="الترجمة والتفسير">الترجمة والتفسير</option>
-          <option value="تنظيم فعاليات">تنظيم فعاليات</option>
-          <option value="دعم نفسي">دعم نفسي</option>
+            <option value="" disabled {{ old('assistance_type') ? '' : 'selected' }}>اختر نوع المساعدة</option>
+            <option value="التعليم" {{ old('assistance_type') == 'التعليم' ? 'selected' : '' }}>التعليم</option>
+            <option value="القراءة" {{ old('assistance_type') == 'القراءة' ? 'selected' : '' }}>القراءة</option>
+            <option value="التوجيه الصوتي" {{ old('assistance_type') == 'التوجيه الصوتي' ? 'selected' : '' }}>التوجيه الصوتي</option>
+            <option value="التدريب" {{ old('assistance_type') == 'التدريب' ? 'selected' : '' }}>التدريب</option>
+            <option value="الترجمة" {{ old('assistance_type') == 'الترجمة' ? 'selected' : '' }}>الترجمة</option>
+            <option value="الدعم النفسي" {{ old('assistance_type') == 'الدعم النفسي' ? 'selected' : '' }}>الدعم النفسي</option>
+            <option value="الرياضة" {{ old('assistance_type') == 'الرياضة' ? 'selected' : '' }}>الرياضة</option>
+            <option value="الترفيه" {{ old('assistance_type') == 'الترفيه' ? 'selected' : '' }}>الترفيه</option>
+            <option value="الصحة" {{ old('assistance_type') == 'الصحة' ? 'selected' : '' }}>الصحة</option>
+            <option value="القانون" {{ old('assistance_type') == 'القانون' ? 'selected' : '' }}>القانون</option>
+            <option value="العلاج الطبيعي" {{ old('assistance_type') == 'العلاج الطبيعي' ? 'selected' : '' }}>العلاج الطبيعي</option>
+            <option value="تقنية المعلومات" {{ old('assistance_type') == 'تقنية المعلومات' ? 'selected' : '' }}>تقنية المعلومات</option>
+            <option value="التنقل" {{ old('assistance_type') == 'التنقل' ? 'selected' : '' }}>التنقل</option>
+            <option value="الدعم التقني" {{ old('assistance_type') == 'الدعم التقني' ? 'selected' : '' }}>الدعم التقني</option>
         </select>
         @error('assistance_type')
         <p class="" style="color: red">{{ $message }}</p>
@@ -177,34 +190,33 @@
             <h2 class="text-sm font-medium text-gray-700 mt-4 mb-2">اختر الأيام:</h2>
             <div class="grid grid-cols-2 gap-4">
                 <label class="inline-flex items-center">
-                    <input type="checkbox" name="available_days[]" value="السبت" class="form-checkbox h-5 w-5 text-green-500">
+                    <input type="checkbox" name="available_days[]" value="السبت" class="form-checkbox h-5 w-5 text-green-500" {{ (is_array(old('available_days')) && in_array('السبت', old('available_days'))) ? 'checked' : '' }}>
                     <span class="ml-2">السبت</span>
                 </label>
                 <label class="inline-flex items-center">
-                    <input type="checkbox" name="available_days[]" value="الأحد" class="form-checkbox h-5 w-5 text-green-500">
+                    <input type="checkbox" name="available_days[]" value="الأحد" class="form-checkbox h-5 w-5 text-green-500" {{ (is_array(old('available_days')) && in_array('الأحد', old('available_days'))) ? 'checked' : '' }}>
                     <span class="ml-2">الأحد</span>
                 </label>
                 <label class="inline-flex items-center">
-                    <input type="checkbox" name="available_days[]" value="الأثنين" class="form-checkbox h-5 w-5 text-green-500">
-                    <span class="ml-2">الأثنين</span>
+                    <input type="checkbox" name="available_days[]" value="الإثنين" class="form-checkbox h-5 w-5 text-green-500" {{ (is_array(old('available_days')) && in_array('الإثنين', old('available_days'))) ? 'checked' : '' }}>
+                    <span class="ml-2">الإثنين</span>
                 </label>
                 <label class="inline-flex items-center">
-                    <input type="checkbox" name="available_days[]" value="الثلاثاء" class="form-checkbox h-5 w-5 text-green-500">
+                    <input type="checkbox" name="available_days[]" value="الثلاثاء" class="form-checkbox h-5 w-5 text-green-500" {{ (is_array(old('available_days')) && in_array('الثلاثاء', old('available_days'))) ? 'checked' : '' }}>
                     <span class="ml-2">الثلاثاء</span>
                 </label>
                 <label class="inline-flex items-center">
-                    <input type="checkbox" name="available_days[]" value="الأربعاء" class="form-checkbox h-5 w-5 text-green-500">
+                    <input type="checkbox" name="available_days[]" value="الأربعاء" class="form-checkbox h-5 w-5 text-green-500" {{ (is_array(old('available_days')) && in_array('الأربعاء', old('available_days'))) ? 'checked' : '' }}>
                     <span class="ml-2">الأربعاء</span>
                 </label>
                 <label class="inline-flex items-center">
-                    <input type="checkbox" name="available_days[]" value="الخميس" class="form-checkbox h-5 w-5 text-green-500">
+                    <input type="checkbox" name="available_days[]" value="الخميس" class="form-checkbox h-5 w-5 text-green-500" {{ (is_array(old('available_days')) && in_array('الخميس', old('available_days'))) ? 'checked' : '' }}>
                     <span class="ml-2">الخميس</span>
                 </label>
                 <label class="inline-flex items-center">
-                    <input type="checkbox" name="available_days[]" value="الجمعة" class="form-checkbox h-5 w-5 text-green-500">
+                    <input type="checkbox" name="available_days[]" value="الجمعة" class="form-checkbox h-5 w-5 text-green-500" {{ (is_array(old('available_days')) && in_array('الجمعة', old('available_days'))) ? 'checked' : '' }}>
                     <span class="ml-2">الجمعة</span>
                 </label>
-
             </div>
             @if ($errors->has('available_days'))
             <p style="color: red">{{ $errors->first('available_days') }}</p>
@@ -219,29 +231,29 @@
     <div>
         <label for="available_from" class="block mb-2 text-sm font-medium text-gray-900 "> من :</label>
         <select  id="available_from" name="available_from" class="bg-green-50 border border-customGreen text-gray-900 text-sm rounded-lg focus:ring-customGreen focus:border-green-500 block w-full p-2.5 h-11" >
-          <option value="" selected disabled>اختر الساعة</option>
-          <option value="07:00">07:00</option>
-          <option value="08:00">08:00</option>
-          <option value="09:00">09:00</option>
-          <option value="10:00">10:00</option>
-          <option value="11:00">11:00</option>
-          <option value="12:00">12:00</option>
-          <option value="13:00">13:00</option>
-          <option value="14:00">14:00</option>
-          <option value="16:00">16:00</option>
-          <option value="17:00">17:00</option>
-          <option value="18:00">18:00</option>
-          <option value="19:00">19:00</option>
-          <option value="20:00">20:00</option>
-          <option value="21:00">21:00</option>
-          <option value="22:00">22:00</option>
-          <option value="23:00">23:00</option>
-          <option value="00:00">00:00</option>
-          <option value="01:00">01:00</option>
-          <option value="02:00">02:00</option>
-          <option value="03:00">03:00</option>
-          <option value="05:00">05:00</option>
-          <option value="06:00">06:00</option>
+            <option value="" disabled {{ old('available_from') == null ? 'selected' : '' }}>اختر الساعة</option>
+            <option value="07:00" {{ old('available_from') == '07:00' ? 'selected' : '' }}>07:00</option>
+            <option value="08:00" {{ old('available_from') == '08:00' ? 'selected' : '' }}>08:00</option>
+            <option value="09:00" {{ old('available_from') == '09:00' ? 'selected' : '' }}>09:00</option>
+            <option value="10:00" {{ old('available_from') == '10:00' ? 'selected' : '' }}>10:00</option>
+            <option value="11:00" {{ old('available_from') == '11:00' ? 'selected' : '' }}>11:00</option>
+            <option value="12:00" {{ old('available_from') == '12:00' ? 'selected' : '' }}>12:00</option>
+            <option value="13:00" {{ old('available_from') == '13:00' ? 'selected' : '' }}>13:00</option>
+            <option value="14:00" {{ old('available_from') == '14:00' ? 'selected' : '' }}>14:00</option>
+            <option value="16:00" {{ old('available_from') == '16:00' ? 'selected' : '' }}>16:00</option>
+            <option value="17:00" {{ old('available_from') == '17:00' ? 'selected' : '' }}>17:00</option>
+            <option value="18:00" {{ old('available_from') == '18:00' ? 'selected' : '' }}>18:00</option>
+            <option value="19:00" {{ old('available_from') == '19:00' ? 'selected' : '' }}>19:00</option>
+            <option value="20:00" {{ old('available_from') == '20:00' ? 'selected' : '' }}>20:00</option>
+            <option value="21:00" {{ old('available_from') == '21:00' ? 'selected' : '' }}>21:00</option>
+            <option value="22:00" {{ old('available_from') == '22:00' ? 'selected' : '' }}>22:00</option>
+            <option value="23:00" {{ old('available_from') == '23:00' ? 'selected' : '' }}>23:00</option>
+            <option value="00:00" {{ old('available_from') == '00:00' ? 'selected' : '' }}>00:00</option>
+            <option value="01:00" {{ old('available_from') == '01:00' ? 'selected' : '' }}>01:00</option>
+            <option value="02:00" {{ old('available_from') == '02:00' ? 'selected' : '' }}>02:00</option>
+            <option value="03:00" {{ old('available_from') == '03:00' ? 'selected' : '' }}>03:00</option>
+            <option value="05:00" {{ old('available_from') == '05:00' ? 'selected' : '' }}>05:00</option>
+            <option value="06:00" {{ old('available_from') == '06:00' ? 'selected' : '' }}>06:00</option>
         </select>
         @error('available_from')
         <p class="" style="color: red">{{ $message }}</p>
@@ -251,29 +263,29 @@
     <div>
         <label for="available_to" class="block mb-2 text-sm font-medium text-gray-900 "> إلى :</label>
         <select  id="available_to" name="available_to" class="bg-green-50 border border-customGreen text-gray-900 text-sm rounded-lg focus:ring-customGreen focus:border-customGreen block w-full p-2.5 h-11" >
-          <option value="" selected disabled>اختر الساعة</option>
-          <option value="07:00">07:00</option>
-          <option value="08:00">08:00</option>
-          <option value="09:00">09:00</option>
-          <option value="10:00">10:00</option>
-          <option value="11:00">11:00</option>
-          <option value="12:00">12:00</option>
-          <option value="13:00">13:00</option>
-          <option value="14:00">14:00</option>
-          <option value="16:00">16:00</option>
-          <option value="17:00">17:00</option>
-          <option value="18:00">18:00</option>
-          <option value="19:00">19:00</option>
-          <option value="20:00">20:00</option>
-          <option value="21:00">21:00</option>
-          <option value="22:00">22:00</option>
-          <option value="23:00">23:00</option>
-          <option value="00:00">00:00</option>
-          <option value="01:00">01:00</option>
-          <option value="02:00">02:00</option>
-          <option value="03:00">03:00</option>
-          <option value="05:00">05:00</option>
-          <option value="06:00">06:00</option>
+            <option value="" disabled {{ old('available_to') == null ? 'selected' : '' }}>اختر الساعة</option>
+            <option value="07:00" {{ old('available_to') == '07:00' ? 'selected' : '' }}>07:00</option>
+            <option value="08:00" {{ old('available_to') == '08:00' ? 'selected' : '' }}>08:00</option>
+            <option value="09:00" {{ old('available_to') == '09:00' ? 'selected' : '' }}>09:00</option>
+            <option value="10:00" {{ old('available_to') == '10:00' ? 'selected' : '' }}>10:00</option>
+            <option value="11:00" {{ old('available_to') == '11:00' ? 'selected' : '' }}>11:00</option>
+            <option value="12:00" {{ old('available_to') == '12:00' ? 'selected' : '' }}>12:00</option>
+            <option value="13:00" {{ old('available_to') == '13:00' ? 'selected' : '' }}>13:00</option>
+            <option value="14:00" {{ old('available_to') == '14:00' ? 'selected' : '' }}>14:00</option>
+            <option value="16:00" {{ old('available_to') == '16:00' ? 'selected' : '' }}>16:00</option>
+            <option value="17:00" {{ old('available_to') == '17:00' ? 'selected' : '' }}>17:00</option>
+            <option value="18:00" {{ old('available_to') == '18:00' ? 'selected' : '' }}>18:00</option>
+            <option value="19:00" {{ old('available_to') == '19:00' ? 'selected' : '' }}>19:00</option>
+            <option value="20:00" {{ old('available_to') == '20:00' ? 'selected' : '' }}>20:00</option>
+            <option value="21:00" {{ old('available_to') == '21:00' ? 'selected' : '' }}>21:00</option>
+            <option value="22:00" {{ old('available_to') == '22:00' ? 'selected' : '' }}>22:00</option>
+            <option value="23:00" {{ old('available_to') == '23:00' ? 'selected' : '' }}>23:00</option>
+            <option value="00:00" {{ old('available_to') == '00:00' ? 'selected' : '' }}>00:00</option>
+            <option value="01:00" {{ old('available_to') == '01:00' ? 'selected' : '' }}>01:00</option>
+            <option value="02:00" {{ old('available_to') == '02:00' ? 'selected' : '' }}>02:00</option>
+            <option value="03:00" {{ old('available_to') == '03:00' ? 'selected' : '' }}>03:00</option>
+            <option value="05:00" {{ old('available_to') == '05:00' ? 'selected' : '' }}>05:00</option>
+            <option value="06:00" {{ old('available_to') == '06:00' ? 'selected' : '' }}>06:00</option>
         </select>
         @error('available_to')
         <p class="" style="color: red">{{ $message }}</p>

@@ -93,11 +93,19 @@ class HelpRequestController extends Controller
      */
     public function store(Request $request)
     {   // تحقق من صحة البيانات
-        $request->validate([
+        $validated = $request->validate([
             'user_id' => 'required|exists:blinds,id', // تأكد من أن user_id موجود في blinds
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'location_url' => 'nullable|url',
+        ], [
+
+            'title.required' => 'العنوان مطلوب.',
+            'title.string' => 'يجب أن يكون العنوان نصًا.',
+            'title.max' => 'يجب ألا يتجاوز العنوان 255 حرفًا.',
+            'description.string' => 'يجب أن تكون الوصف نصًا.',
+            'description.required' => 'يجب إدخال وصف للطلب.',
+            'location_url.url' => 'يرجى إدخال عنوان URL صالح.',
         ]);
 
         // قم بإنشاء طلب المساعدة
@@ -170,7 +178,7 @@ class HelpRequestController extends Controller
 
 
         // Redirect with success message
-        return redirect()->route('my.help.request')->with('update', 'تم تحديث المعلومات بنجاح!');
+        return redirect()->route('my.help.request')->with('update', 'تم تعديل الطلب بنجاح!');
 
     }
 

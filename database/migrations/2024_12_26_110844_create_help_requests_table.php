@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('help_requests', function (Blueprint $table) {
             $table->id();
             $table->string('title'); // أو text إذا كان العنوان طويلًا
-            $table->text('description')->nullable();
-            $table->enum('status', ['قيد التنفيذ', 'مكتمل', 'معلق'])->default('معلق');
+            $table->text('description');
+            $table->string('status')->default('معلق');
             $table->string('location_url')->nullable();
             $table->foreignId('user_id')
             ->constrained('blinds')

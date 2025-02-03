@@ -12,14 +12,7 @@
 </div>
 @endif
 
-@if(session()->has('rejection'))  <!-- استخدام 'error' للخطأ -->
-<div class="bg-red-800 text-center py-4 lg:px-4">
-    <div class="p-2 bg-red-700 items-center text-red-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-      <span class="flex rounded-full bg-red-400 uppercase px-2 py-1 text-xs font-bold mr-3">خطأ</span>
-      <span class="font-semibold mr-2 text-left text-sm flex-auto">{{ session()->get('rejection') }}</span>
-    </div>
-</div>
-@endif
+
 
 <div class="grid  grid-cols-1 md:grid-cols-2 gap-x-20 gap-8 md:py-16 py-60  mx-16">
 

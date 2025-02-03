@@ -31,7 +31,15 @@ class AuthenticatedSessionController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-        ]);
+        ], [
+            'email.required' => 'البريد الإلكتروني مطلوب.',
+            'email.email' => 'يرجى إدخال بريد إلكتروني صالح.',
+            'password.required' => 'كلمة المرور مطلوبة.',
+        ]
+
+
+    );
+
 
         $user = User::where('email', $request->email)->first();
 
@@ -78,7 +86,7 @@ class AuthenticatedSessionController extends Controller
 
         // في حالة فشل المصادقة
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+        'email' => 'يرجى التحقق من البيانات المدخلة',
         ])->onlyInput('email');
     }
 

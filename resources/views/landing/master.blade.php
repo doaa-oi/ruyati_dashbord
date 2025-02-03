@@ -36,7 +36,12 @@
 
 </div>
 
-    <div id="1" class="hero-bg-image flex flex-col items-start justify-end  pr-24 " >
+<div id="1" class="hero-bg-image flex flex-col items-start justify-end pr-24 relative overflow-hidden h-screen">
+
+ <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover object-center">
+        <source src="{{ asset('images/video.mp4') }}" type="video/mp4">
+    </video>
+
 
         <div class="relative w-34 h-full mt-64 ">
         <h1  class="text-gray-100 text-4xl font-bold text-start">جمعية تمكن المتطوعين </h1>

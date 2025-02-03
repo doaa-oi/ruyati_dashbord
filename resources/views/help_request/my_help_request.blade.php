@@ -65,14 +65,104 @@
             <a href="{{ route('help.request.edit', ['encryptedId' => Crypt::encrypt($help_request->id)]) }}" tabindex="0" class="navigable items-center flex-grow px-3 py-3 text-sm font-bold text-center text-white bg-customGreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-customGreen dark:hover:bg-green-700 dark:focus:ring-green-800">
                 تعديل
             </a>
-            <form action="{{ route('help.request.destroy', $help_request->id) }}" method="POST" class="flex-grow inline-block">
-                @csrf
-                @method('DELETE')
-                <button type="submit" tabindex="0" class="navigable items-center w-full px-3 py-3 text-sm font-bold text-center text-customGreen bg-none border-2 border-customGreen rounded-lg hover:bg-customGreen hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                    حذف
-                </button>
-            </form>
-        </div>
+
+        <!-- نافذة التأكيد -->
+<div id="confirmModal" class="modal" >
+    <div class="modal-content rounded-2xl h-60 text-xl">
+        <p  class=" mt-10 mb-16">هل أنت متأكد أنك تريد حذف هذا الطلب؟</p>
+        <button id="confirmBtn" class="rounded-lg ml-16 text-customGreen font-bold">حذف</button>
+        <button id="confirmNoBtn" class="rounded-lg text-customGreen font-bold" onclick="closeModal()">إلغاء</button>
+
+    </div>
+</div>
+
+<!-- النموذج للحذف -->
+<form id="delete-form-{{ $help_request->id }}" action="{{ route('help.request.destroy', $help_request->id) }}" method="POST" class="flex-grow inline-block">
+    @csrf
+    @method('DELETE')
+    <button type="button" onclick="openModal({{ $help_request->id }})" tabindex="0" class="navigable items-center w-full px-3 py-3 text-sm font-bold text-center text-customGreen bg-none border-2 border-customGreen rounded-lg hover:bg-customGreen hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+        حذف
+    </button>
+</form>
+
+
+
+<style>
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+
+
+
+</style>
+
+
+            <script>
+                let deleteId;
+
+    function openModal(id) {
+        deleteId = id; // حفظ ID الطلب المراد حذفه
+        document.getElementById('confirmModal').style.display = "block";
+
+        // قراءة نص تأكيد عملية الحذف
+        const speech = new SpeechSynthesisUtterance('تأكيد عملية الحذف : للحذف اضغظ 1 لإلغاء الحذف اضغط 2');
+        speech.lang = 'ar-SA'; // تعيين اللغة العربية
+        window.speechSynthesis.speak(speech); // قراءة النص
+    }
+
+    function closeModal() {
+        document.getElementById('confirmModal').style.display = "none";
+    }
+
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+        if (deleteId) {
+            document.getElementById('delete-form-' + deleteId).submit();
+        }
+        closeModal();
+    });
+
+    // إغلاق النافذة عند النقر خارج النافذة
+    window.onclick = function(event) {
+        let modal = document.getElementById('confirmModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    };
+// التحقق من مفاتيح الضغط
+window.addEventListener('keydown', (e) => {
+    let modal = document.getElementById('confirmModal');
+    if (modal.style.display === 'block') { // تحقق إذا كانت النافذة مرئية
+        switch (e.key) {
+            case '1': // الضغط على الزر 1
+                document.getElementById('confirmBtn').click(); // محاكاة الضغط على زر حذف
+                break;
+            case '2': // الضغط على الزر 2
+                closeModal(); // محاكاة الضغط على زر إلغاء
+                break;
+        }
+    }
+});
+</script>        </div>
         </div>
       </div>
 

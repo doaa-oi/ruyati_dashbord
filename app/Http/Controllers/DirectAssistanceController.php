@@ -34,7 +34,7 @@ class DirectAssistanceController extends Controller
 
         Notification::send($blind, new ApprovedNotification($volunteer->id, $volunteer->name));
 
-        return redirect()->back()->with('success', 'تمت الموافقة على طلب المساعدة بنجاح.');
+        return redirect()->route('volunteers.index')->with('success', 'تم قبول طلب المساعدة بنجاح.');
     }
 
     public function completeAssistance($id)
@@ -57,7 +57,7 @@ class DirectAssistanceController extends Controller
 
         Notification::send($blind, new AssistanceCompletedNotification($volunteer->id, $volunteer->name,$assistance->id));
 
-        return redirect()->route('volunteers.index')->with('success', 'تم اكتمال المساعدة بنجاح.');
+        return redirect()->route('volunteers.index')->with('success', 'تم اكمال المساعدة بنجاح.');
     }
 
 
@@ -78,7 +78,7 @@ class DirectAssistanceController extends Controller
         // يمكنك إضافة منطق إضافي هنا إذا أردت
         Notification::send($blind, new RejectionNotification($volunteer->id, $volunteer->name));
 
-        return redirect()->back()->with('rejection', 'تم رفض طلب المساعدة.'); // رسالة تؤكد الرفض
+        return redirect()->route('volunteers.index')->with('rejection', 'تم رفض طلب المساعدة .');
     }
 
 
