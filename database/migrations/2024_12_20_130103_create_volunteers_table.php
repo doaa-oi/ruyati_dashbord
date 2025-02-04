@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('age');
             $table->string('city');
             $table->string('phone');
-            $table->string('national_id');
+            $table->string('national_id')->unique();
             $table->string('gender');
             $table->string('assistance_type');
             $table->text('available_days'); // سيتم تخزين الأيام كسلسلة نصية

@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Blind;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBlindRequest extends FormRequest
@@ -23,7 +25,23 @@ class StoreBlindRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:blinds', // تعديل هنا
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                function ($attribute, $value, $fail) {
+                    // تحقق من وجود البريد الإلكتروني في جدول المستخدمين
+                    if (User::where('email', $value)->exists()) {
+                        $fail('هذا البريد الإلكتروني مستخدم بالفعل في المستخدمين.');
+                    }
+
+                    // تحقق من وجود البريد الإلكتروني في جدول الكفيفين
+                if (Blind::where('email', $value)->exists()) {
+                    $fail('هذا البريد الإلكتروني مستخدم بالفعل في الكفيفين.');
+                }
+                },
+            ],
             'password' => 'required|string|confirmed|min:8',
             'age' => 'required|integer|min:12|max:120',
             'city' => 'required|string|max:255',

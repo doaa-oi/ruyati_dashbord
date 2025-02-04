@@ -54,22 +54,22 @@
     <!-- Email Address -->
     <div class="mb-5">
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">البريد الإلكتروني</label>
-        <input type="email" id="email" title=" البريد الإلكتروني" tabindex="0" class="navigable bg-gray-50 border-2 border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 w-96" name="email" required autofocus placeholder="البريد الإلكتروني" value="{{ old('email') }}" />
-        {{-- @error('email')
+        <input type="email" id="email" title=" البريد الإلكتروني" tabindex="0" class="navigable bg-gray-50 border-2 border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 w-96" name="email"  autofocus placeholder="البريد الإلكتروني" value="{{ old('email') }}" />
+        @error('email')
         <span tabindex="0" class="navigable text-red-600 text-sm mt-1">{{ $message }}</span>
-        @enderror --}}
+        @enderror
     </div>
 
     <!-- Password -->
     <div class="mb-8 mt-8">
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">كلمة المرور</label>
-        <input type="password" id="password" title=" كلمة المرور" tabindex="0" class="navigable bg-gray-50 border-2 border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 w-96" name="password" required autocomplete="current-password" placeholder="كلمة المرور" value="{{ old('password') }}" />
-        {{-- @error('password')
+        <input type="password" id="password" title=" كلمة المرور" tabindex="0" class="navigable bg-gray-50 border-2 border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 w-96" name="password"  autocomplete="current-password" placeholder="كلمة المرور" value="{{ old('password') }}" />
+        @error('password')
         <span tabindex="0" class="navigable text-red-600 text-sm mt-1">{{ $message }}</span>
-        @enderror --}}
+        @enderror
     </div>
 
-    @error('email')
+    @error('both')
     <span tabindex="0" class="navigable text-red-600 text-sm mt-1 mr-20 font-bold" id="emailErrorMessage">
         {{ $message }}
     </span>

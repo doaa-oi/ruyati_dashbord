@@ -84,10 +84,22 @@ class AuthenticatedSessionController extends Controller
             }
         }
 
-        // في حالة فشل المصادقة
-        return back()->withErrors([
-        'email' => 'يرجى التحقق من البيانات المدخلة',
-        ])->onlyInput('email');
+     // في حالة فشل المصادقة
+     $errors = [];
+
+     // تحقق من الأخطاء
+     if (!$user && empty($request->password)) {
+         $errors['both'] = 'يرجى التحقق من البيانات المدخلة'; // كلاهما غير صحيح
+     } elseif (!$user) {
+         $errors['both'] = 'يرجى التحقق من البيانات المدخلة'; // البريد الإلكتروني غير صحيح
+     } elseif (empty($request->password)) {
+         $errors['password'] = 'يرجى إدخال كلمة المرور.'; // كلمة المرور فارغة
+     } else {
+         // إذا كان كلا حقلي الإدخال غير صحيحين
+         $errors['both'] = 'يرجى التحقق من البيانات المدخلة';
+     }
+
+     return back()->withErrors($errors)->onlyInput('email');
     }
 
     /**

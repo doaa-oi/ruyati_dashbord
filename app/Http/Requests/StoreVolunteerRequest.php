@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
+use App\Models\Volunteer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreVolunteerRequest extends FormRequest
@@ -23,12 +25,28 @@ class StoreVolunteerRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:volunteers',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                function ($attribute, $value, $fail) {
+                    // تحقق من وجود البريد الإلكتروني في جدول المستخدمين
+                    if (User::where('email', $value)->exists()) {
+                        $fail('هذا البريد الإلكتروني مستخدم بالفعل  .');
+                    }
+
+                    // تحقق من وجود البريد الإلكتروني في جدول المتطوعين
+                    if (Volunteer::where('email', $value)->exists()) {
+                        $fail('هذا البريد الإلكتروني مستخدم بالفعل.');
+                    }
+                },
+            ],
             'password' => 'required|string|confirmed|min:8',
             'age' => 'required|integer|min:12|max:120',
             'city' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            'national_id' => 'required|string|max:20',
+            'national_id' => 'required|string|max:20|unique:volunteers,national_id',
             'gender' => 'required|string|in:ذكر,أنثى', // Select option
             'assistance_type' => 'required|string', // Select option
             'available_days' => 'required|array', // Checkboxes
@@ -70,6 +88,7 @@ class StoreVolunteerRequest extends FormRequest
             'national_id.required' => 'الرقم الوطني مطلوب.',
             'national_id.string' => 'يجب أن يكون الرقم الوطني نصًا.',
             'national_id.max' => 'يجب ألا يتجاوز الرقم الوطني 20 حرفًا.',
+            'national_id.unique' => 'هذا الرقم الوطني مستخدم بالفعل.',
 
             'gender.required' => 'الجنس مطلوب.',
             'gender.string' => 'يجب أن يكون الجنس نصًا.',

@@ -89,15 +89,24 @@
         // استرجع الكفيف المرتبط بالمستخدم الحالي
         $blind = Auth::user()->blind;
     @endphp
+@if ($volunteer->availability === 'متاح') <!-- تحقق مما إذا كانت حالة المتطوع "متاح" -->
 <form action="{{ route('send.help.request', ['encryptedId' => Crypt::encrypt($volunteer->id), 'encryptedBlindId' => Crypt::encrypt($blind->id)]) }}" method="POST" class="inline-block">
     @csrf <!-- حماية ضد CSRF -->
-        <button type="submit" tabindex="0" class="navigable flex items-center justify-center py-3 bg-customGreen text-white border border-customGreen hover:bg-white hover:text-green-600 rounded-lg font-bold text-sm w-56 h-12">
-            <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-              <path fill="currentColor" d="M48 0C21.5 0 0 21.5 0 48v64c0 8.8 7.2 16 16 16h80V48C96 21.5 74.5 0 48 0zm208 412.6V352h288V96c0-52.9-43.1-96-96-96H111.6C121.7 13.4 128 29.9 128 48v368c0 38.9 34.7 69.7 74.8 63.1C234.2 474 256 444.5 256 412.6zM288 384v32c0 52.9-43.1 96-96 96h336c61.9 0 112-50.1 112-112 0-8.8-7.2-16-16-16H288z"/>
-            </svg>
-            طلب المساعدة
-        </button>
-    </form>
+    <button type="submit" tabindex="0" class="navigable flex items-center justify-center py-3 bg-customGreen text-white border border-customGreen hover:bg-white hover:text-green-600 rounded-lg font-bold text-sm w-56 h-12">
+        <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+          <path fill="currentColor" d="M48 0C21.5 0 0 21.5 0 48v64c0 8.8 7.2 16 16 16h80V48C96 21.5 74.5 0 48 0zm208 412.6V352h288V96c0-52.9-43.1-96-96-96H111.6C121.7 13.4 128 29.9 128 48v368c0 38.9 34.7 69.7 74.8 63.1C234.2 474 256 444.5 256 412.6zM288 384v32c0 52.9-43.1 96-96 96h336c61.9 0 112-50.1 112-112 0-8.8-7.2-16-16-16H288z"/>
+        </svg>
+        طلب المساعدة
+    </button>
+</form>
+@else
+<button type="button" tabindex="0" class="navigable flex items-center justify-center py-3 bg-gray-300 text-gray-500 border border-gray-300 rounded-lg font-bold text-sm w-56 h-12" title="لا يمكنك طلب المساعدة لأن المتطوع غير متاح الآن">
+    <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+      <path fill="currentColor" d="M48 0C21.5 0 0 21.5 0 48v64c0 8.8 7.2 16 16 16h80V48C96 21.5 74.5 0 48 0zm208 412.6V352h288V96c0-52.9-43.1-96-96-96H111.6C121.7 13.4 128 29.9 128 48v368c0 38.9 34.7 69.7 74.8 63.1C234.2 474 256 444.5 256 412.6zM288 384v32c0 52.9-43.1 96-96 96h336c61.9 0 112-50.1 112-112 0-8.8-7.2-16-16-16H288z"/>
+    </svg>
+    طلب المساعدة
+</button>
+@endif
 
     <a href="https://wa.me/218{{ $volunteer->phone }}?call" tabindex="0" class="navigable flex items-center justify-center py-3 bg-none text-customGreen border border-customGreen hover:bg-customGreen hover:text-white rounded-lg font-bold text-sm w-56 h-12">
         <svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" fill="currentColor" class="ml-2" viewBox="0 0 448 512">

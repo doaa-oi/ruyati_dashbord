@@ -72,33 +72,64 @@
     </a>
     @if(request()->has('from_notification') && request()->get('from_notification') == true)
 
-    <form action="{{ route('direct.assistance.approve', ['volunteerId' => Auth::user()->volunteer->id, 'blindId' => $blind->id]) }}" method="POST" class="inline-block">
-        @csrf
-        <button type="submit" class="flex items-center justify-center py-3 px-9 bg-blue-600 text-white border border-blue-600 hover:text-blue-600 hover:bg-white rounded-lg font-bold text-sm h-12">
-            قبول تقديم المساعدة
-        </button>
-    </form>
 
+    @php
+        $directAssistance = \App\Models\DirectAssistance::where('blind_id', $blind->id)
+                                                         ->where('volunteer_id', Auth::user()->volunteer->id)
+                                                         ->where('status','قيد التنفيذ')
+                                                         ->first();
+    @endphp
 
-<!-- زر اكتمال المساعدة -->
-@if($assistanceId) <!-- تحقق من وجود المعرف قبل عرض الزر -->
-<form action="{{ route('direct.assistance.complete', ['id' => $assistanceId]) }}" method="POST" class="inline-block">
+    @if($directAssistance)
+<!-- أزرار القبول والرفض ستكون مظللة -->
+<form action="{{ route('direct.assistance.approve', ['volunteerId' => Auth::user()->volunteer->id, 'blindId' => $blind->id]) }}" method="POST" class="inline-block">
+    @csrf
+    <button type="submit" class="flex items-center justify-center py-3 px-9 bg-blue-600 text-white border border-blue-600 rounded-lg font-bold text-sm h-12" style="opacity: 0.5;" disabled>
+        قبول تقديم المساعدة
+    </button>
+</form>
+
+<form action="{{ route('direct.assistance.reject', ['volunteerId' => Auth::user()->volunteer->id, 'blindId' => $blind->id]) }}" method="POST" class="inline-block">
+    @csrf
+    <button type="submit" class="flex items-center justify-center py-3 px-9 bg-red-600 text-white border border-red-600 rounded-lg font-bold text-sm h-12" style="opacity: 0.5;" disabled>
+        رفض تقديم المساعدة
+    </button>
+</form>
+
+<form action="{{ route('direct.assistance.complete', ['id' => $directAssistance->id]) }}" method="POST" class="inline-block">
     @csrf
     <button type="submit" class="flex items-center justify-center py-3 px-9 bg-blue-600 text-white border border-blue-600 hover:text-blue-600 hover:bg-white rounded-lg font-bold text-sm h-12">
         اكتمال المساعدة
     </button>
 </form>
+
 @else
-    <p>لم يتم تقديم طلب مساعدة لك بعد.</p> <!-- رسالة إن كان لا يوجد مساعدات -->
+<!-- حالة العادية عندما لا تكون حالته قيد التنفيذ -->
+<form action="{{ route('direct.assistance.approve', ['volunteerId' => Auth::user()->volunteer->id, 'blindId' => $blind->id]) }}" method="POST" class="inline-block">
+    @csrf
+    <button type="submit" class="flex items-center justify-center py-3 px-9 bg-blue-600 text-white border border-blue-600 rounded-lg font-bold text-sm h-12">
+        قبول تقديم المساعدة
+    </button>
+</form>
+
+<form action="{{ route('direct.assistance.reject', ['volunteerId' => Auth::user()->volunteer->id, 'blindId' => $blind->id]) }}" method="POST" class="inline-block">
+    @csrf
+    <button type="submit" class="flex items-center justify-center py-3 px-9 bg-red-600 text-white border border-red-600 rounded-lg font-bold text-sm h-12">
+        رفض تقديم المساعدة
+    </button>
+</form>
+
+<!-- زر اكتمال المساعدة سيكون مظلل -->
+<form action="{{ route('direct.assistance.complete', ['id' => $assistanceId]) }}" method="POST" class="inline-block">
+    @csrf
+    <button type="submit" class="flex items-center justify-center py-3 px-9 bg-blue-600 text-white border border-blue-600 rounded-lg font-bold text-sm h-12" style="opacity: 0.5;" disabled>
+        اكتمال المساعدة
+    </button>
+</form>
 @endif
 
+@else
 
-    <form action="{{ route('direct.assistance.reject', ['volunteerId' => Auth::user()->volunteer->id, 'blindId' => $blind->id]) }}" method="POST" class="inline-block">
-        @csrf
-        <button type="submit" class="flex items-center justify-center py-3 px-9 bg-red-600 text-white border border-red-600 hover:text-red-600 hover:bg-white rounded-lg font-bold text-sm h-12">
-            رفض تقديم المساعدة
-        </button>
-    </form>
 
     @endif
 

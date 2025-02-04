@@ -38,26 +38,30 @@ class DirectAssistanceController extends Controller
     }
 
     public function completeAssistance($id)
-    {
-        $assistance = DirectAssistance::findOrFail($id);
-        $assistance->update([
+    {    // استرداد سجل المساعدة الذي يملك المعرف
+        $directAssistance =DirectAssistance::findOrFail($id);
 
-            'completed_at' => now(),
-            'status' => 'مكتمل', // تحديث الحالة إلى مكتمل
+        // تحقق مما إذا كانت الحالة قيد التنفيذ قبل التحديث
+        if ($directAssistance->status === 'قيد التنفيذ') {
+            // تحديث الحالة إلى مكتمل وتسجيل تاريخ الاكتمال
+            $directAssistance->update([
+                'status' => 'مكتمل',
+                'completed_at' => now(), // تسجيل تاريخ الاكتمال
 
+            ]);
+            $volunteer = Volunteer::findOrFail($directAssistance->volunteer_id);
+            $volunteer->update(['availability' => 'متاح']); // تحديث حالة المتطوع
 
+            $blind = Blind::findOrFail($directAssistance->blind_id); // تأكد من وجود حقل blind_id
 
-    ]); // تحديث وقت الاكتمال
+            Notification::send($blind, new AssistanceCompletedNotification($volunteer->id, $volunteer->name,$directAssistance->id));
 
+            // إرسال إشعار بنجاح العملية (يمكنك تغيير الواجهة)
+            return redirect()->route('volunteers.index')->with('success', 'تم إكمال المساعدة بنجاح.'); // تغيير الوجهة حسب الحاجة
+        }
 
-        $volunteer = Volunteer::findOrFail($assistance->volunteer_id);
-        $volunteer->update(['availability' => 'متاح']); // تحديث حالة المتطوع
-
-        $blind = Blind::findOrFail($assistance->blind_id); // تأكد من وجود حقل blind_id
-
-        Notification::send($blind, new AssistanceCompletedNotification($volunteer->id, $volunteer->name,$assistance->id));
-
-        return redirect()->route('volunteers.index')->with('success', 'تم اكمال المساعدة بنجاح.');
+        // إذا لم تكن الحالة "قيد التنفيذ"
+        return back()->withErrors(['success' => 'لا يمكن إكمال الطلب، الحالة ليست قيد التنفيذ.']);
     }
 
 

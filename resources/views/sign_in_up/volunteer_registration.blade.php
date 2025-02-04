@@ -112,6 +112,9 @@
           class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
           placeholder=" الرقم الوطني "
            />
+           @error('national_id')
+           <p class="" style="color: red">{{ $message }}</p>
+           @enderror
       </div>
 
        <div class="">

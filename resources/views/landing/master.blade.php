@@ -44,6 +44,7 @@
 
 
         <div class="relative w-34 h-full mt-64 ">
+        {{-- <h1  class="text-gray-100 text-4xl font-bold text-start">﴿فَإِنَّهَا لَا تَعْمَى الْأَبْصَارُ وَلَٰكِن تَعْمَى الْقُلُوبُ الَّتِي فِي الصُّدُورِ﴾</h1> --}}
         <h1  class="text-gray-100 text-4xl font-bold text-start">جمعية تمكن المتطوعين </h1>
         <h1 class="text-gray-100 text-4xl  font-bold pb-10 text-start">   من مساعدة المكفوفين</h1>
 
