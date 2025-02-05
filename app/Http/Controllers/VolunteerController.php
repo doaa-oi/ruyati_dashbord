@@ -21,7 +21,7 @@ class VolunteerController extends Controller
      */
     public function index()
     {
-        $blinds=Blind::all();
+        $blinds=Blind::where('status', 1)->get();
 
         return view('layoutv.dashv',compact('blinds'));
     }
@@ -256,9 +256,12 @@ public function search(Request $request)
     $query = $request->input('query');
 
     if ($query) {
-        // البحث عن المتطوعين بالاسم أو المدينة أو نوع المساعدة
-        $blinds = Blind::where('name', 'LIKE', "%{$query}%")
-            ->orWhere('city', 'LIKE', "%{$query}%")
+        // البحث عن الكفيفين بالاسم أو المدينة مع حالة تساوي 1
+        $blinds = Blind::where('status', 1) // تأكد من أن الحالة تساوي 1
+            ->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('name', 'LIKE', "%{$query}%")
+                             ->orWhere('city', 'LIKE', "%{$query}%"); // تأكد من تضمين نوع المساعدة
+            })
             ->get();
     } else {
         // إذا لم يكن هناك استعلام، احصل على جميع المتطوعين

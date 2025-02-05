@@ -22,7 +22,7 @@ class BlindController extends Controller
      */
     public function index()
     {
-        $volunteers=Volunteer::all();
+        $volunteers = Volunteer::where('status', 1)->get(); // اجلب المتطوعين الذين حالتهم 1
         //return $volunteers;
 
         $blind = Auth::user()->blind;
@@ -204,10 +204,13 @@ class BlindController extends Controller
         $query = $request->input('query');
 
         if ($query) {
-            // البحث عن المتطوعين بالاسم، المدينة، أو التخصص
-            $volunteers = Volunteer::where('name', 'LIKE', "%{$query}%")
-                ->orWhere('city', 'LIKE', "%{$query}%")
-                ->orWhere('assistance_type', 'LIKE', "%{$query}%")
+            // البحث عن المتطوعين بالاسم، المدينة، أو التخصص مع حالة تساوي 1
+            $volunteers = Volunteer::where('status', 1) // تأكد من أن الحالة تساوي 1
+                ->where(function ($queryBuilder) use ($query) {
+                    $queryBuilder->where('name', 'LIKE', "%{$query}%")
+                                 ->orWhere('city', 'LIKE', "%{$query}%")
+                                 ->orWhere('assistance_type', 'LIKE', "%{$query}%");
+                })
                 ->get();
         } else {
             // إذا لم يكن هناك استعلام، استرجع جميع المتطوعين
