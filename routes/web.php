@@ -44,9 +44,9 @@ Route::resource('/register/blind',BlindController::class);
 //     return view('layout.dashb');
 // })->name('blind.dashboard')->middleware(CheckUserType::class);
 
-// Route::get('/volunteer/dashboard', function () {
-//     return view('layoutv.dashv');
-// })->name('volunteer.dashboard');
+//  Route::get('/vo', function () {
+//      return view('admin.edit_blind');
+//  })->name('volunteer.dashboard');
 
 
 
@@ -131,6 +131,11 @@ Route::middleware(['auth', 'checkUserType:admin'])->group(function () {
     Route::get('/volunteers/rejected', [AdminController::class, 'showRejectedVolunteers'])->name('show.volunteers.rejected');
     Route::get('/show/statistics', [AdminController::class, 'showStatistics'])->name('show.statistics');
 
+    Route::post('/edit/blind/{id}', [AdminController::class, 'editBlind'])->name('edit.blind');
+    Route::put('/update/blind', [AdminController::class, 'updateBlind'])->name('update.blind');
+
+    Route::post('/edit/volunteer/{id}', [AdminController::class, 'editVolunteer'])->name('edit.volunteer');
+    Route::put('/update/volunteer', [AdminController::class, 'updateVolunteer'])->name('update.volunteer');
 
 
 });

@@ -141,7 +141,7 @@
    <select id="gender" name="gender" class="bg-green-50 border border-customGreen text-gray-900 text-sm rounded-lg focus:ring-customGreen focus:border-customGreen block h-11 w-64 p-2.5">
     <option value="" disabled>اختر الجنس</option>
     <option value="ذكر" {{ $volunteer->gender == 'ذكر' ? 'selected' : '' }}>ذكر</option>
-    <option value="انثى" {{ $volunteer->gender == 'انثى' ? 'selected' : '' }}>انثى</option>
+    <option value="انثى" {{ $volunteer->gender == 'أنثى' ? 'selected' : '' }}>أنثى</option>
 </select>
    @error('gender')
    <p class="" style="color: red">{{ $message }}</p>
@@ -151,16 +151,21 @@
  <div>
    <label for="assistance_type" class="block mb-2 text-sm font-medium text-gray-900 ">نوع المساعدة</label>
    <select id="assistance_type" name="assistance_type" class="bg-green-50 border border-customGreen text-gray-900 text-sm rounded-lg focus:ring-customGreen focus:border-customGreen block p-2.5 h-11 w-64">
-    <option value="" disabled>اختر نوع المساعدة</option>
-    <option value="القراءة والكتابة" {{ $volunteer->assistance_type == 'القراءة والكتابة' ? 'selected' : '' }}>القراءة والكتابة</option>
-    <option value="التنقل" {{ $volunteer->assistance_type == 'التنقل' ? 'selected' : '' }}>التنقل</option>
-    <option value="التكنولوجيا" {{ $volunteer->assistance_type == 'التكنولوجيا' ? 'selected' : '' }}>التكنولوجيا</option>
-    <option value="الرياضة والترفيه" {{ $volunteer->assistance_type == 'الرياضة والترفيه' ? 'selected' : '' }}>الرياضة والترفيه</option>
-    <option value="التعليم والتدريب" {{ $volunteer->assistance_type == 'التعليم والتدريب' ? 'selected' : '' }}>التعليم والتدريب</option>
-    <option value="الصحة" {{ $volunteer->assistance_type == 'الصحة' ? 'selected' : '' }}>الصحة</option>
-    <option value="الترجمة والتفسير" {{ $volunteer->assistance_type == 'الترجمة والتفسير' ? 'selected' : '' }}>الترجمة والتفسير</option>
-    <option value="تنظيم فعاليات" {{ $volunteer->assistance_type == 'تنظيم فعاليات' ? 'selected' : '' }}>تنظيم فعاليات</option>
-    <option value="دعم نفسي" {{ $volunteer->assistance_type == 'دعم نفسي' ? 'selected' : '' }}>دعم نفسي</option>
+    <option value="" disabled {{ old('assistance_type') ? '' : 'selected' }}>اختر نوع المساعدة</option>
+    <option value="التعليم" {{ old('assistance_type', $volunteer->assistance_type) == 'التعليم' ? 'selected' : '' }}>التعليم</option>
+    <option value="القراءة" {{ old('assistance_type', $volunteer->assistance_type) == 'القراءة' ? 'selected' : '' }}>القراءة</option>
+    <option value="التوجيه الصوتي" {{ old('assistance_type', $volunteer->assistance_type) == 'التوجيه الصوتي' ? 'selected' : '' }}>التوجيه الصوتي</option>
+    <option value="التدريب" {{ old('assistance_type', $volunteer->assistance_type) == 'التدريب' ? 'selected' : '' }}>التدريب</option>
+    <option value="الترجمة" {{ old('assistance_type', $volunteer->assistance_type) == 'الترجمة' ? 'selected' : '' }}>الترجمة</option>
+    <option value="الدعم النفسي" {{ old('assistance_type', $volunteer->assistance_type) == 'الدعم النفسي' ? 'selected' : '' }}>الدعم النفسي</option>
+    <option value="الرياضة" {{ old('assistance_type', $volunteer->assistance_type) == 'الرياضة' ? 'selected' : '' }}>الرياضة</option>
+    <option value="الترفيه" {{ old('assistance_type', $volunteer->assistance_type) == 'الترفيه' ? 'selected' : '' }}>الترفيه</option>
+    <option value="الصحة" {{ old('assistance_type', $volunteer->assistance_type) == 'الصحة' ? 'selected' : '' }}>الصحة</option>
+    <option value="القانون" {{ old('assistance_type', $volunteer->assistance_type) == 'القانون' ? 'selected' : '' }}>القانون</option>
+    <option value="العلاج الطبيعي" {{ old('assistance_type', $volunteer->assistance_type) == 'العلاج الطبيعي' ? 'selected' : '' }}>العلاج الطبيعي</option>
+    <option value="تقنية المعلومات" {{ old('assistance_type', $volunteer->assistance_type) == 'تقنية المعلومات' ? 'selected' : '' }}>تقنية المعلومات</option>
+    <option value="التنقل" {{ old('assistance_type', $volunteer->assistance_type) == 'التنقل' ? 'selected' : '' }}>التنقل</option>
+    <option value="الدعم التقني" {{ old('assistance_type', $volunteer->assistance_type) == 'الدعم التقني' ? 'selected' : '' }}>الدعم التقني</option>
 </select>
    @error('assistance_type')
    <p class="" style="color: red">{{ $message }}</p>
@@ -185,8 +190,8 @@
             <span class="ml-2">الأحد</span>
         </label>
         <label class="inline-flex items-center">
-            <input type="checkbox" name="available_days[]" value="الأثنين" class="form-checkbox h-5 w-5 text-green-500" {{ in_array('الأثنين', $volunteer->available_days) ? 'checked' : '' }}>
-            <span class="ml-2">الأثنين</span>
+            <input type="checkbox" name="available_days[]" value="الإثنين" class="form-checkbox h-5 w-5 text-green-500" {{ in_array('الإثنين', $volunteer->available_days) ? 'checked' : '' }}>
+            <span class="ml-2">الإثنين</span>
         </label>
         <label class="inline-flex items-center">
             <input type="checkbox" name="available_days[]" value="الثلاثاء" class="form-checkbox h-5 w-5 text-green-500" {{ in_array('الثلاثاء', $volunteer->available_days) ? 'checked' : '' }}>

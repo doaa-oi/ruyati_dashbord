@@ -97,7 +97,7 @@
         <select  id="gender" name="gender" tabindex="0" class="navigable border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block h-11 w-80 p-2.5 " >
             <option value="" disabled>اختر الجنس</option>
             <option tabindex="0" class="navigable " value="ذكر" {{ $blind->gender == 'ذكر' ? 'selected' : '' }}>ذكر</option>
-            <option tabindex="0" class="navigable " value="انثى" {{ $blind->gender == 'انثى' ? 'selected' : '' }}>انثى</option>
+            <option tabindex="0" class="navigable " value="أنثى" {{ $blind->gender == 'أنثى' ? 'selected' : '' }}>انثى</option>
         </select>
 
         @error('gender')

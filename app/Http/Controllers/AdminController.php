@@ -202,4 +202,103 @@ foreach ($volunteers_statistics as $volunteer_statistics) {
 }
 
 
+public function editBlind( $id){
+
+    $blind = Blind::findOrFail($id); // تأكد من أن ID صحيح
+    return view('admin.edit_blind', compact('blind'));
+
+}
+
+
+
+public function updateBlind(Request $request)
+    {
+
+        $blind = Blind::where('id', $request->id)->firstOrFail();
+        $user = User::where('id', $blind->user_id)->firstOrFail();
+
+        // Update the User information
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            // You can choose to hash the password if it's provided
+           // 'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'user_type' => $request->user_type, // If user_type needs to be updated
+        ]);
+
+        // Update the Volunteer information
+        $blind->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            // You can choose to hash the password if it's provided
+            //'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'user_type' => $request->user_type, // If user_type needs to be updated
+
+            'age' => $request->age,
+            'city' => $request->city,
+            'phone' => $request->phone,
+
+            'gender' => $request->gender,
+
+            // Note: user_type is typically not updated in volunteer's table
+        ]);
+
+
+        // Redirect with success message
+        return redirect()->route('show.blinds')->with('success', 'تم تحديث المعلومات بنجاح!');
+
+    }
+
+
+    public function editVolunteer( $id){
+
+        $volunteer = Volunteer::findOrFail($id); // تأكد من أن ID صحيح
+        // تحويل days المخزنة كنص إلى مصفوفة إذا كانت مخزنة كسلسلة نصية مفصولة
+       $volunteer->available_days = explode(',', $volunteer->available_days);
+
+        return view('admin.edit_volunteer', compact('volunteer'));
+
+    }
+
+
+    public function updateVolunteer(Request $request)
+    {
+        $volunteer = Volunteer::where('id', $request->id)->firstOrFail();
+        $user = User::where('id', $volunteer->user_id)->firstOrFail();
+
+        // Update the User information
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            // You can choose to hash the password if it's provided
+           // 'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'user_type' => $request->user_type, // If user_type needs to be updated
+        ]);
+
+        // Update the Volunteer information
+        $volunteer->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            // You can choose to hash the password if it's provided
+            //'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'user_type' => $request->user_type, // If user_type needs to be updated
+
+            'age' => $request->age,
+            'city' => $request->city,
+            'phone' => $request->phone,
+            'national_id' => $request->national_id,
+            'gender' => $request->gender,
+            'assistance_type' => $request->assistance_type,
+            'available_days' => implode(',', $request->available_days),
+            'available_from' => $request->available_from,
+            'available_to' => $request->available_to,
+            // Note: user_type is typically not updated in volunteer's table
+        ]);
+
+
+        // Redirect with success message
+        return redirect()->route('show.volunteers')->with('success', 'تم تحديث المعلومات بنجاح!');
+    }
+
+
 }
