@@ -126,7 +126,7 @@ class AdminController extends Controller
         $volunteer->availability = 'غير متاح';
         $volunteer->save(); // حفظ التغييرات في قاعدة البيانات
 
-        return redirect()->back()->with('success', 'تم تحديث حالة المتطوع وحالة البلاغ بنجاح.');
+        return redirect()->back()->with('deactivate', 'تم تقييد المتطوع وحالة البلاغ بنجاح.');
     }
 
     public function showVolunteersDeactivate(Request $request)
@@ -147,7 +147,7 @@ class AdminController extends Controller
     $volunteer->availability = 'متاح'; // تحديث حالة التوفر
     $volunteer->save(); // حفظ التغييرات في قاعدة البيانات
 
-    return redirect()->back()->with('success', 'تم تحديث حالة المتطوع وحالة البلاغ بنجاح.');
+    return redirect()->back()->with('accept', 'تم إلغاء تقييد المتطوع بنجاح.');
 }
 
 public function showRejectedBlinds()
@@ -245,7 +245,7 @@ public function updateBlind(Request $request)
 
 
         // Redirect with success message
-        return redirect()->route('show.blinds')->with('success', 'تم تحديث المعلومات بنجاح!');
+        return redirect()->route('show.blinds')->with('success', 'تم تحديث معلومات الكفيف بنجاح!');
 
     }
 
@@ -297,7 +297,7 @@ public function updateBlind(Request $request)
 
 
         // Redirect with success message
-        return redirect()->route('show.volunteers')->with('success', 'تم تحديث المعلومات بنجاح!');
+        return redirect()->route('show.volunteers')->with('success', 'تم تحديث معلومات المتطوع بنجاح!');
     }
 
 

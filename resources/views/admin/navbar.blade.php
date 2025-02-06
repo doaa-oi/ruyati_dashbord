@@ -117,6 +117,32 @@
 </div>
 @endif
 
+@if(session()->has('accept'))
+<div class="bg-green-800 text-center py-4 lg:px-4 fixed top-16 w-full z-40">
+    <div tabindex="0" class="navigable p-2 bg-green-700 items-center text-green-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+      <span class="flex rounded-full bg-green-400 uppercase px-2 py-1 text-xs font-bold mr-3">نجاح</span>
+      <span class="font-semibold mr-2 text-left text-sm flex-auto">{{ session()->get('accept') }}</span>
+    </div>
+</div>
+@endif
+
+@if(session()->has('reject'))  <!-- استخدام 'error' للخطأ -->
+<div class="bg-red-800 text-center py-4 lg:px-4 fixed top-16 w-full z-40">
+    <div tabindex="0" class="navigable p-2 bg-red-700 items-center text-red-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+      <span class="flex rounded-full bg-red-400 uppercase px-2 py-1 text-xs font-bold mr-3">حذف</span>
+      <span class="font-semibold mr-2 text-left text-sm flex-auto">{{ session()->get('reject') }}</span>
+    </div>
+</div>
+@endif
+
+@if(session()->has('deactivate'))  <!-- استخدام 'error' للخطأ -->
+<div class="bg-orange-800 text-center py-4 lg:px-4 fixed top-16 w-full z-40">
+    <div tabindex="0" class="navigable p-2 bg-orange-700 items-center text-orange-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+      <span class="flex rounded-full bg-orange-400 uppercase px-2 py-1 text-xs font-bold mr-3">تقييد</span>
+      <span class="font-semibold mr-2 text-left text-sm flex-auto">{{ session()->get('deactivate') }}</span>
+    </div>
+</div>
+@endif
 
 {{--
 

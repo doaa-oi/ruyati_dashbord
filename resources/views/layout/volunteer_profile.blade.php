@@ -134,7 +134,7 @@
             @endphp
 
 
-        <div class="fixed inset-0 bg-black opacity-50 backdrop"></div>
+        <div class="fixed inset-0 bg-black opacity-50 backdrop "></div>
 
         <div class="flex items-center justify-center h-screen -mt-96"> <!-- الحاوية الأساسية -->
             <div class="relative z-10 bg-green-50 p-8 rounded-lg shadow-lg h-80 w-2/5 border-4 border-customGreen mb-4">
@@ -149,14 +149,9 @@
                         <input type="hidden" name="blind_id" value="{{ Auth::user()->blind->id }}">
 
                         <div class="flex justify-around items-center mb-4">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <div class="flex items-center">
-                                    <input type="radio" name="rating" id="rating{{ $i }}" value="{{ $i }}" class="hidden">
-                                    <label for="rating{{ $i }}" tabindex="0" class="navigable w-14 h-14 flex items-center justify-center rounded-full border-2 border-customGreen cursor-pointer hover:bg-green-300 text-customGreen font-bold text-2xl">
-                                        {{ $i }}
-                                    </label>
-                                </div>
-                            @endfor
+                            <div class="flex items-center">
+                                <input type="number" name="rating" id="rating" min="1" max="5" title="أدخل تقييمك هنا من 1 إلى 5" tabindex="0" class="navigable ml-4 w-32 p-2 border border-customGreen rounded text-center">
+                            </div>
                         </div>
 
                         <div>
@@ -180,7 +175,7 @@
                 </div>
 
                 <!-- زر البلاغات -->
-                <button onclick="showReportSection()" tabindex="0" class="navigable absolute left-4 bottom-4 w-24 h-12 bg-red-500 text-white rounded-full hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-red-300">
+                <button id="report-button" onclick="showReportSection()" tabindex="0" class="navigable absolute left-4 bottom-4 w-24 h-12 bg-red-500 text-white rounded-full hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-red-300 mt-4">
                     بلاغ
                 </button>
 
@@ -203,7 +198,10 @@
     function showReportSection() {
                 document.getElementById('rating-section').classList.add('hidden'); // إخفاء قسم التقييمات
                 document.getElementById('report-section').classList.remove('hidden'); // إظهار قسم البلاغ
-            }
+                // إخفاء زر البلاغات
+                document.getElementById('report-button').style.display = 'none';
+
+}
 </script>
 {{--
 @if ($notifications) <!-- استخدام المتغير بشكل صحيح -->

@@ -55,8 +55,8 @@
             @if ($notification->type === 'App\Notifications\ApprovedNotification')
                 <a href="{{ route('showvolunteer.profile', ['encryptedId' => Crypt::encrypt($notification->data['VolunteerId']), 'from_notification' => true]) }}" tabindex="0" class="navigable flex w-full">
                     <div class="notifyimg bg-pink inline-block mr-3">
-                        <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                            <path fill="#0f9c73" d="M380.2 510.8a8 8 0 0 1 -11-2.7l-125.3-206.4a31.9 31.9 0 0 0 13-9.5l126 207.6a8 8 0 0 1 -2.7 11zM142.8 314.3l-32.5 89.5 36.1 88.3c6.7 16.4 25.4 24.2 41.7 17.5 16.4-6.7 24.2-25.4 17.5-41.7l-62.8-153.5zM96 88c24.3 0 44-19.7 44-44S120.3 0 96 0 52 19.7 52 44s19.7 44 44 44zm154.8 169.1l-120-152c-4.7-6-11.8-9.1-18.8-9.1V96H80v0c-7.1 0-14.2 3.2-18.9 9.2L0 183.8v95.7c0 13.5 11 24.8 24.5 24.5C37.5 303.7 48 293.1 48 280v-79.8l16-20.6v140.7L9.9 469.1c-6 16.6 2.5 35 19.1 41 16.6 6 35-2.5 41-19.1L136 309.6V202.4l-31.4-39.8a4 4 0 1 1 6.3-5l102.3 129.2c9.1 11.6 24.4 11.3 33.7 4 10.4-8.2 12.2-23.3 4-33.7z"/>
+                        <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
+                            <path fill="#0f9c73" d="M173.9 439.4l-166.4-166.4c-10-10-10-26.2 0-36.2l36.2-36.2c10-10 26.2-10 36.2 0L192 312.7 432.1 72.6c10-10 26.2-10 36.2 0l36.2 36.2c10 10 10 26.2 0 36.2l-294.4 294.4c-10 10-26.2 10-36.2 0z"/>
                         </svg>
                     </div>
                     <div class="mr-3">
@@ -67,8 +67,8 @@
             @elseif ($notification->type === 'App\Notifications\RejectionNotification')
                 <a href="{{ route('showvolunteer.profile', ['encryptedId' => Crypt::encrypt($notification->data['VolunteerId']), 'from_notification' => true]) }}" tabindex="0" class="navigable flex w-full">
                     <div class="notifyimg bg-pink inline-block mr-3">
-                        <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                            <path fill="#0f9c73" d="..."/> <!-- ضع المسار الصحيح هنا -->
+                        <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" height="20" width="13.75" viewBox="0 0 352 512">
+                            <path fill="#ff0000" d="M242.7 256l100.1-100.1c12.3-12.3 12.3-32.2 0-44.5l-22.2-22.2c-12.3-12.3-32.2-12.3-44.5 0L176 189.3 75.9 89.2c-12.3-12.3-32.2-12.3-44.5 0L9.2 111.5c-12.3 12.3-12.3 32.2 0 44.5L109.3 256 9.2 356.1c-12.3 12.3-12.3 32.2 0 44.5l22.2 22.2c12.3 12.3 32.2 12.3 44.5 0L176 322.7l100.1 100.1c12.3 12.3 32.2 12.3 44.5 0l22.2-22.2c12.3-12.3 12.3-32.2 0-44.5L242.7 256z"/>
                         </svg>
                     </div>
                     <div class="mr-3">
@@ -78,8 +78,8 @@
                 </a> @elseif ($notification->type === 'App\Notifications\AssistanceCompletedNotification')
                 <a href="{{ route('showvolunteer.profile', ['encryptedId' => Crypt::encrypt($notification->data['VolunteerId']), 'from_notification' => true]) }}" tabindex="0" class="navigable flex w-full">
                     <div class="notifyimg bg-pink inline-block mr-3">
-                        <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                            <path fill="#0f9c73" d="..."/> <!-- ضع المسار الصحيح هنا -->
+                        <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
+                            <path fill="#0091ff" d="M505 174.8l-39.6-39.6c-9.4-9.4-24.6-9.4-33.9 0L192 374.7 80.6 263.2c-9.4-9.4-24.6-9.4-33.9 0L7 302.9c-9.4 9.4-9.4 24.6 0 34L175 505c9.4 9.4 24.6 9.4 33.9 0l296-296.2c9.4-9.5 9.4-24.7 .1-34zm-324.3 106c6.2 6.3 16.4 6.3 22.6 0l208-208.2c6.2-6.3 6.2-16.4 0-22.6L366.1 4.7c-6.2-6.3-16.4-6.3-22.6 0L192 156.2l-55.4-55.5c-6.2-6.3-16.4-6.3-22.6 0L68.7 146c-6.2 6.3-6.2 16.4 0 22.6l112 112.2z"/>
                         </svg>
                     </div>
                     <div class="mr-3">

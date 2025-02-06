@@ -120,7 +120,7 @@
 </form>
 
 <!-- زر اكتمال المساعدة سيكون مظلل -->
-<form action="{{ route('direct.assistance.complete', ['id' => $assistanceId]) }}" method="POST" class="inline-block">
+<form action="#" method="POST" class="inline-block">
     @csrf
     <button type="submit" class="flex items-center justify-center py-3 px-9 bg-blue-600 text-white border border-blue-600 rounded-lg font-bold text-sm h-12" style="opacity: 0.5;" disabled>
         اكتمال المساعدة
