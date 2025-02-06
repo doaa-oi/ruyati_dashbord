@@ -17,11 +17,7 @@
 @section('users')
 
 
-@if(session()->has('success'))
-    <script>
-        alert("{{ session('success') }}");
-    </script>
-@endif
+
 
 <div class="container mx-auto mt-10 ">
 

@@ -152,7 +152,7 @@
        <select id="gender" name="gender" class="bg-green-50 border border-customGreen text-gray-900 text-sm rounded-lg focus:ring-customGreen focus:border-customGreen block h-11 w-64 p-2.5">
         <option value="" disabled>اختر الجنس</option>
         <option value="ذكر" {{ $volunteer->gender == 'ذكر' ? 'selected' : '' }}>ذكر</option>
-        <option value="انثى" {{ $volunteer->gender == 'أنثى' ? 'selected' : '' }}>أنثى</option>
+        <option value="أنثى" {{ $volunteer->gender == 'أنثى' ? 'selected' : '' }}>أنثى</option>
     </select>
        @error('gender')
        <p class="" style="color: red">{{ $message }}</p>
@@ -311,6 +311,22 @@
 
 
           </form>
+
+
+          <h2 class="col-span-2 text-xl font-bold mb-2 text-start pb-8 mt-14">كلمة المرور</h2>
+
+
+    <div class="grid grid-cols-1 justify-items-center">
+
+        <div>
+            <label for="current_password" class="text-sm font-medium text-gray-700">كلمة المرور الحالية</label><br>
+            <input type="text" id="current_password" name="current_password"
+                   class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
+                   value="{{ $volunteer->password }}"  readonly/>
+
+        </div>
+        </div>
+</div>
 </div>
 </div>
 @endsection

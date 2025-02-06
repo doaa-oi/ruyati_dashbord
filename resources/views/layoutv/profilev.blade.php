@@ -141,7 +141,7 @@
    <select id="gender" name="gender" class="bg-green-50 border border-customGreen text-gray-900 text-sm rounded-lg focus:ring-customGreen focus:border-customGreen block h-11 w-64 p-2.5">
     <option value="" disabled>اختر الجنس</option>
     <option value="ذكر" {{ $volunteer->gender == 'ذكر' ? 'selected' : '' }}>ذكر</option>
-    <option value="انثى" {{ $volunteer->gender == 'أنثى' ? 'selected' : '' }}>أنثى</option>
+    <option value="أنثى" {{ $volunteer->gender == 'أنثى' ? 'selected' : '' }}>أنثى</option>
 </select>
    @error('gender')
    <p class="" style="color: red">{{ $message }}</p>
