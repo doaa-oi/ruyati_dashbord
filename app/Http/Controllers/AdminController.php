@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-   
+
 
 
     public function showBlinds(Request $request)
@@ -123,7 +123,7 @@ class AdminController extends Controller
         $volunteer->availability = 'غير متاح';
         $volunteer->save(); // حفظ التغييرات في قاعدة البيانات
 
-        return redirect()->back()->with('deactivate', 'تم تقييد المتطوع وحالة البلاغ بنجاح.');
+        return redirect()->back()->with('deactivate', 'تم تقييد المتطوع وتحديث حالة البلاغ بنجاح.');
     }
 
     public function showVolunteersDeactivate(Request $request)

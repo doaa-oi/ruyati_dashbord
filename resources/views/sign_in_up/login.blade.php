@@ -5,7 +5,7 @@
 @endsection
 
 @section('title2')
-<h1 tabindex="0" class="navigable text-center mb-16 text-3xl font-bold text-green-500"><span class="text-black">تسجيل</span> الدخول </h1>
+<h1 tabindex="0" class="navigable text-center mb-16 text-3xl font-bold text-customGreen"><span class="text-black">تسجيل</span> الدخول </h1>
 @endsection
 
 @section('form')
@@ -45,12 +45,12 @@
     </script>
     @enderror
 
-    <button type="submit" tabindex="0" class="navigable text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm   py-2.5 text-center mb-4 mt-6 w-60 mr-16 h-11">تسجيل الدخول</button>
+    <button type="submit" tabindex="0" class="navigable text-white bg-customGreen hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm   py-2.5 text-center mb-4 mt-6 w-60 mr-16 h-11">تسجيل الدخول</button>
 
     <div tabindex="0" class="navigable mr-24">
         <p class="text-sm text-gray-500 sm:mt-0">
             ليس لديك حساب؟
-            <a href="/select" tabindex="0" class="navigable text-green-500 underline">إنشاء حساب</a>
+            <a href="/select" tabindex="0" class="navigable text-customGreen underline">إنشاء حساب</a>
         </p>
 
     </div>

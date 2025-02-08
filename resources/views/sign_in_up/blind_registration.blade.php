@@ -159,7 +159,7 @@
 
     <div>
             <button
-            tabindex="0" class="navigable inline-block shrink-0 rounded-md border border-green-700 bg-green-600 px-12 py-3 text-l font-medium text-white transition hover:bg-transparent hover:text-green-500 focus:outline-none focus:ring active:text-green-500 h-12 w-80">
+            tabindex="0" class="navigable inline-block shrink-0 rounded-md border border-green-700 bg-customGreen px-12 py-3 text-l font-medium text-white transition hover:bg-transparent hover:text-green-500 focus:outline-none focus:ring active:text-green-500 h-12 w-80">
             حفظ
         </button>
     </div>
@@ -167,7 +167,7 @@
     <div>
     <p tabindex="0" class="navigable mt-4 text-sm text-gray-500 sm:mt-0">
         هل لديك حساب بالفعل؟
-        <a href="/login" tabindex="0" class="navigable text-green-500 underline">تسجيل الدخول</a>
+        <a href="/login" tabindex="0" class="navigable text-customGreen underline">تسجيل الدخول</a>
     </p>
     </div>
 
@@ -177,6 +177,7 @@
   </form>
 
   <script src="{{ asset('js/gps.js') }}"></script>
+
 
 
 @endsection

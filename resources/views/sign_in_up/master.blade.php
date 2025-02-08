@@ -13,13 +13,13 @@
 </head>
 <body>
 
-<section class="bg-white">
+<section >
     <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
-      <section class=" relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+      <section class=" relative flex h-32 items-end  lg:col-span-5 lg:h-full xl:col-span-6">
 
         <img
 
-          src="{{ asset('images/bilndv_bg.png') }}"
+          src="{{ asset('images/Volunteer_blind.png') }}"
           class="absolute inset-0 h-full w-full object-fill opacity-80"
         />
 
@@ -28,12 +28,12 @@
             أهلا بكم في رؤيتي
           </h2>
           <p class="mt-4 leading-relaxed text-green-900">
-            يهدف النظام إلى تسهيل عملية وصول المتطوعين للأشخاص المكفوفين لتقديم المساعدة.
+            يهدف النظام إلى تسهيل عملية وصول المتطوعين للأشخاص الكفيفين لتقديم المساعدة.
           </p>
         </div>
       </section>
 
-      <main class="border-4 border-green-500 rounded-3xl flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6 m-16">
+      <main class="border-4 border-customGreen rounded-3xl flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6 m-16">
         <div class=" max-w-xl lg:max-w-3xl">
 <div>
 @yield('title2')
