@@ -2,7 +2,7 @@
 <div class="mr-20 max-w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
     <div class="flex justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
         <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1">نشاطات المتطوعين</h5>
-        <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Leads generated per week</p>
+        <p class="text-sm font-normal text-gray-500 dark:text-gray-400"></p>
     </div>
 
     <div id="column-chart"></div> <!-- المخطط العمودي هنا -->

@@ -1,14 +1,7 @@
 @extends('admin.master')
 
 @section('search')
-{{-- <form action="{{ route('show.volunteers') }}" method="GET" class="flex w-full">
-    <input type="text" name="query" class="w-80 bg-green-50 border border-customGreen text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-customGreen block p-2.5" placeholder="ابحث عن المتطوعين بالاسم، المدينة، أو التخصص" required />
-    <button type="submit" class="p-3 ms-2 text-sm font-medium text-white bg-customGreen rounded-lg border border-customGreen hover:bg-white hover:text-customGreen focus:ring-4 focus:outline-none focus:ring-customGreen ">
-        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-        </svg>
-    </button>
-</form> --}}
+
 
 @endsection
 
@@ -56,11 +49,7 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @if($volunteers->isEmpty())
-            <div class="text-center">
-                <p>لا يوجد أشخاص مطابقون للبحث.</p>
-            </div>
-        @else --}}
+           
             @foreach ($volunteers as $volunteer)
             <tr class="{{ $loop->index % 2 == 0 ? 'bg-white' : 'bg-gray-100' }}"> <!-- استخدام colors مختلفة -->
                     <td class="py-2 px-4 border-b">{{ $volunteer->id }} </td>

@@ -40,21 +40,7 @@ class VolunteerController extends Controller
     public function store(StoreVolunteerRequest $request)
     {
 
-        // $validated = $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:volunteers',
-        //     'password' => 'required|string|confirmed|min:8',
-        //     'age' => 'required|integer|min:1|max:120',
-        //     'city' => 'required|string|max:255',
-        //     'phone' => 'required|string|max:20',
-        //     'national_id' => 'required|string|max:20',
-        //     'gender' => 'required|string|in:ذكر,انثى',
-        //     'assistance_type' => 'required|string',
-        //     'available_days' => 'required|array',
-        //     'available_from' => 'required|string',
-        //     'available_to' => 'required|string',
-        //     'user_type' => 'required|string|in:volunteer,blind',
-        // ]);
+
 
         $selectedDays = implode(',', $request->input('available_days'));
 
@@ -62,7 +48,6 @@ class VolunteerController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'user_type' => $request->user_type,
-//            'password' => Hash::make($request->password), // تجزئة كلمة المرور
             'password' => $request->password,
             'email_verified_at' => now(), // تعيين الوقت الحالي
             'remember_token' => Str::random(60), // تعيين قيمة عشوائية
@@ -74,7 +59,6 @@ class VolunteerController extends Controller
             'user_id' => $user->id, // احفظ معرف المستخدم هنا
             'name' => $request->name,
             'email' => $request->email,
-            //'password' => Hash::make($request->password), // Directly use $request->password
             'password' => $request->password,
             'age' => $request->age,
             'city' => $request->city,
@@ -93,9 +77,6 @@ class VolunteerController extends Controller
 ]);
 return redirect()->route('volunteers.index');
 
-
-        //return redirect()->route('home')->with('success', 'تم التسجيل بنجاح!');
-//        return view('layoutv.dashv');
 
 
     }
@@ -184,8 +165,6 @@ return redirect()->route('volunteers.index');
         $volunteer->update([
             'name' => $request->name,
             'email' => $request->email,
-            // You can choose to hash the password if it's provided
-            //'password' => $request->password ? Hash::make($request->password) : $user->password,
             'user_type' => $request->user_type, // If user_type needs to be updated
 
             'age' => $request->age,
@@ -197,7 +176,6 @@ return redirect()->route('volunteers.index');
             'available_days' => implode(',', $request->available_days),
             'available_from' => $request->available_from,
             'available_to' => $request->available_to,
-            // Note: user_type is typically not updated in volunteer's table
         ]);
 
 
@@ -214,38 +192,6 @@ return redirect()->route('volunteers.index');
     }
 
 
-
-
-//     public function updatePassword(Request $request)
-// {
-
-//    // dd($request->current_password); // تحقق من القيم
-
-//     // تحقق من صحة البيانات
-//     $request->validate([
-//         'current_password' => 'required|string',
-//         'new_password' => 'required|string|min:8|confirmed',
-//     ]);
-
-//     // الحصول على المتطوع المرتبط بالمستخدم الحالي
-//     $volunteer = Volunteer::where('user_id', Auth::id())->firstOrFail(); // تأكد من استخدام user_id
-
-//     // التحقق من صحة كلمة المرور الحالية
-//     if (!Hash::check($request->current_password, $volunteer->user->password)) {
-//         return redirect()->back()->withErrors(['current_password' => 'كلمة المرور الحالية غير صحيحة.']);
-//     }
-
-//     // تحديث كلمة المرور في جدول المستخدمين
-//     $volunteer->user->password = Hash::make($request->new_password);
-//     $volunteer->user->save();
-
-//     // إذا كان لديك حاجة لتحديث معلومات المتطوع أيضًا، يمكنك إضافتها هنا إذا لزم الأمر
-//     // مثال على تحديث معلومات المتطوع إذا كانت جديدة
-//     // $volunteer->update([...]);
-
-//     // توجيه المستخدم مع رسالة نجاح
-//     return redirect()->route('volunteer.dashboard')->with('success', 'تم تغيير كلمة المرور بنجاح!');
-// }
 
 
 

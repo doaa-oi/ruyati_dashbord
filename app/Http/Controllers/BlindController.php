@@ -54,17 +54,7 @@ class BlindController extends Controller
      */
     public function store(StoreBlindRequest $request)
     {
-        // // التحقق من البيانات المدخلة
-        // $validated = $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:blinds', // تعديل هنا
-        //     'password' => 'required|string|confirmed|min:8',
-        //     'age' => 'required|integer|min:1|max:120',
-        //     'city' => 'required|string|max:255',
-        //     'phone' => 'required|string|max:20',
-        //     'gender' => 'required|string|in:ذكر,انثى',
-        //     'user_type' => 'required|string|in:blind',
-        // ]);
+
 
         $user = User::create([
             'name' => $request->name,
@@ -92,8 +82,7 @@ class BlindController extends Controller
         ]);
         return redirect()->route('blind.index');
 
-     //   return redirect()->route('blind.dashboard')->with('success', 'تم التسجيل بنجاح!');
-    //return view('layout.dashb');
+
     }
 
     /**
@@ -140,8 +129,6 @@ class BlindController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            // You can choose to hash the password if it's provided
-           // 'password' => $request->password ? Hash::make($request->password) : $user->password,
             'user_type' => $request->user_type, // If user_type needs to be updated
         ]);
 
@@ -149,8 +136,6 @@ class BlindController extends Controller
         $blind->update([
             'name' => $request->name,
             'email' => $request->email,
-            // You can choose to hash the password if it's provided
-            //'password' => $request->password ? Hash::make($request->password) : $user->password,
             'user_type' => $request->user_type, // If user_type needs to be updated
 
             'age' => $request->age,

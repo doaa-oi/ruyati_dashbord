@@ -105,35 +105,7 @@
         @enderror
     </div>
 
-       {{-- <div class="">
-        <label for="password" class=" text-sm font-bold text-gray-700"> كلمة المرور </label><br>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          class="text-center border-2 border-gray-300 text-gray-900 h-11 w-80 rounded-lg text-sm mt-2 mb-5"
-          placeholder=" *********  "
-           />
-      </div>
-       <div class="">
-        <label for="name" class=" text-sm font-bold text-gray-700"> تأكيد كلمة المرور </label><br>
-        <input
-          type="password"
-          id="name"
-          name="name"
-          class="text-center  border-2 border-gray-300 text-gray-900 h-11 w-80 rounded-lg text-sm mt-2 mb-5"
-          placeholder=" *********"
-           />
-      </div> --}}
 
-
-      {{-- <div class="col-span-2 ">
-        <label for="location" class=" text-sm font-bold text-gray-700" >الموقع</label><br>
-            <button id="locationBtn" type="button" class="inline-block shrink-0  border border-customGreen bg-customGreen  text-l font-medium text-white transition hover:bg-transparent hover:text-customGreen focus:outline-none focus:ring active:text-customGreen py-2 px-4 rounded-lg h-11 mt-2">
-        تحديد موقعي
-    </button>
-    <input type="text" id="locationField" name="location" class="text-center  border-2 border-gray-300 text-gray-900 h-11 w-80 rounded-lg text-sm  mr-8" readonly>
-</div> --}}
     </div>
 
 
@@ -196,19 +168,7 @@
             <p tabindex="0" class="navigable " style="color: red">{{ $message }}</p>
             @enderror
         </div>
-        {{-- @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-                <p>{{ $error }}</p>
-            @endforeach
-        </div>
-    @endif --}}
+        
     </div>
 
     <div class="grid grid-cols-1 gap-x-10 justify-items-center mt-14">

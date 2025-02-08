@@ -44,11 +44,6 @@
 
 
 
-  {{-- <div class="mb-4 pb-2 ">
-    <h1 class="font-semibold">الموقع الجغرافي:</h1>
-    <h1> تريبولي</h1>
-  </div> --}}
-
 
 </div>
 

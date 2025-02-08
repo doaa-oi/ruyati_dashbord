@@ -58,8 +58,6 @@ class AssistanceController extends Controller
         // تحديث حالة المتطوع إلى "متاح"
         $volunteer->update(['availability' => 'متاح']); // تأكد من أن لديك حقل availability في جدول المتطوعين
 
-       // $blind = Blind::findOrFail($helpRequest->blind_id); // استرجاع الكفيف المرتبط
-       // $blind->notify(new AssistanceCompletedNotification($assistance));
         Notification::send($blind, new AssistanceCompletedNotification($volunteer->id, $volunteer->name,$assistance));
 
         return redirect()->route('volunteers.index')->with('success', 'تم اكمال المساعدة بنجاح.');

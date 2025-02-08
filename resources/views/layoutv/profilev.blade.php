@@ -106,35 +106,7 @@
       />
  </div>
 
-  {{-- <div class="">
-   <label for="password" class=" text-sm font-medium text-gray-700"> كلمة المرور </label><br>
-   <input
-   value="{{ $volunteer->password }}"
-
-     type="password"
-     id="password"
-     name="password"
-     class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
-     placeholder=" *********  "
-      />
-      @error('password')
-      <p class="" style="color: red">{{ $message }}</p>
-      @enderror
- </div>
-
-  <div class="">
-   <label for="password_confirmation" class=" text-sm font-medium text-gray-700"> تأكيد كلمة المرور </label><br>
-   <input
-     type="password"
-     id="password_confirmation"
-     name="password_confirmation"
-     class="text-center bg-green-50 border border-customGreen text-gray-900 h-11 w-64 rounded-lg text-sm mt-2 mb-5"
-     placeholder=" *********"
-      />
-      @error('password_confirmation')
-      <p class="" style="color: red">{{ $message }}</p>
-      @enderror
-   </div> --}}
+  
 
  <div>
    <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 ">الجنس</label>

@@ -40,22 +40,12 @@ Route::resource('/register/blind',BlindController::class);
 
 
 
-// Route::get('/blind/dashboard', function () {
-//     return view('layout.dashb');
-// })->name('blind.dashboard')->middleware(CheckUserType::class);
-
-//  Route::get('/vo', function () {
-//      return view('admin.edit_blind');
-//  })->name('volunteer.dashboard');
-
 
 
 // حماية route المكفوفين
 Route::middleware(['auth', 'checkUserType:blind'])->group(function () {
-   // Route::get('/blind/dashboard', function () {return view('layout.dashb');})->name('blind.dashboard');
     Route::get('/blinds', [BlindController::class, 'index'])->name('blinds.index');
     Route::get('/profileBlind', [BlindController::class, 'show'])->name('blinds.profile');
-    //Route::post('/profileBlind/update', [BlindController::class, 'update'])->name('blinds.profile.update');
     Route::put('/profileBlind', [BlindController::class, 'update'])->name('blinds.profile.update');
     Route::put('/blind/password/update', [PasswordController::class, 'update'])->name('blinds.password.update');
     Route::get('/volunteer/{encryptedId}', [BlindController::class, 'showvolunteer'])->name('showvolunteer.profile');
@@ -81,7 +71,6 @@ Route::middleware(['auth', 'checkUserType:blind'])->group(function () {
 
 // حماية route المتطوعين
 Route::middleware(['auth', 'checkUserType:volunteer'])->group(function () {
-   // Route::get('/volunteer/dashboard', function () {return view('layoutv.dashv');})->name('volunteer.dashboard');
     Route::get('/volunteers', [VolunteerController::class, 'index'])->name('volunteers.index');
 
     Route::get('/profileVolunteer', [VolunteerController::class, 'show'])->name('volunteer.profile');
@@ -110,12 +99,9 @@ Route::middleware(['auth', 'checkUserType:volunteer'])->group(function () {
 
 
 });
-//Route::get('/blind/{encryptedId}', [VolunteerController::class, 'showblind'])->name('blind.profile');
-// Route::get('/rating', [RatingController::class, 'showRatingForm']);
 
 // // حماية route الأدمن
 Route::middleware(['auth', 'checkUserType:admin'])->group(function () {
-    // Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.index');
     Route::get('/show/blinds', [AdminController::class, 'showBlinds'])->name('show.blinds');
     Route::get('/show/volunteers', [AdminController::class, 'showVolunteers'])->name('show.volunteers');
     Route::get('/new/volunteers/requests', [AdminController::class, 'newVolunteer'])->name('new.volunteers.requests');
@@ -140,7 +126,5 @@ Route::middleware(['auth', 'checkUserType:admin'])->group(function () {
 
 });
 
-// Route::get('volunteer-edit/{id}', [VolunteerController::class,'edit'])->name('volunteer.edit');
-//Route::get('/volunteer/{volunteer}/edit', [VolunteerController::class, 'edit'])->name('volunteer.edit');
 
 require __DIR__.'/auth.php';

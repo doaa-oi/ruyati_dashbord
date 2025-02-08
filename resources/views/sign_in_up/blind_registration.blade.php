@@ -149,13 +149,6 @@
       </div>
 
 
-      {{-- <div class="col-span-2 ">
-        <label for="location" class=" text-sm font-medium text-gray-700" >الموقع</label><br>
-            <button id="locationBtn" type="button" class="inline-block shrink-0  border border-green-700 bg-green-600  text-l font-medium text-white transition hover:bg-transparent hover:text-green-500 focus:outline-none focus:ring active:text-green-500 py-2 px-4 rounded-lg h-11 mt-2">
-        تحديد موقعي
-    </button>
-    <input type="text" id="locationField" name="location" class="text-center bg-green-50 border border-green-500 text-gray-900 h-11 w-56 rounded-lg text-sm  mr-8" readonly>
-</div> --}}
     </div>
 
 

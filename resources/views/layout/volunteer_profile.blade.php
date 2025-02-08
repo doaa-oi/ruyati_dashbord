@@ -203,55 +203,7 @@
 
 }
 </script>
-{{--
-@if ($notifications) <!-- استخدام المتغير بشكل صحيح -->
 
-    @foreach ($notifications as $notification) <!-- استخدام حلقة للمرور عبر جميع الإشعارات -->
-
-       @php
-            // تحويل نص JSON إلى مصفوفة
-            $data = json_decode($notification->data, true);
-        @endphp
-<div class="fixed inset-0 bg-black opacity-50 backdrop"></div>
-<div class="flex items-center justify-center h-screen -mt-96"> <!-- الحاوية الأساسية -->
-
-        <div class=" relative z-10 bg-green-50 p-8 rounded-lg shadow-lg h-80 w-2/5 border-4 border-customGreen mb-4">
-            <h2 class="text-xl mb-6 text-center">لقد أكمل المتطوع <span class="text-customGreen font-bold">{{ $data['VolunteerName']}}</span> تقديم المساعدة</h2>
-            <h2 class="text-xl mb-10 text-center">اختر تقييمك (1-5)</h2>
-            <div class="flex justify-around items-center mb-4">
-                <form id="ratingForm" method="POST" action="{{ route('rating.submit') }}">
-                    @csrf
-                    <input type="hidden" name="volunteer_id" value="{{ $volunteer->id }}">
-                    <input type="hidden" name="blind_id" value="{{ Auth::user()->blind->id }}">
-                    <input type="hidden" name="rating" id="ratingValue"> <!-- حقل مخفي لتخزين قيمة التقييم -->
-
-                    @for ($i = 1; $i <= 5; $i++)
-                        <button type="submit" class="w-14 h-14 flex items-center justify-center rounded-full bg-customGreen text-white text-2xl font-bold hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-300" onclick="submitRating({{ $i }})">
-                            {{ $i }}
-                        </button>
-                    @endfor
-                </form>
-            </div>
-            <div class="absolute my-4 left-4">
-                <button type="submit" class="w-full h-12 px-10 bg-red-500 text-white rounded-full hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-red-300">
-                    بلاغ
-                </button>
-            </div>
-        </div>
-        </div>
-    @endforeach
-@endif
-
-
-<script>
-    function submitRating(rating) {
-        // تعيين القيمة إلى الحقل المخفي
-        document.getElementById('ratingValue').value = rating;
-
-        // تقديم النموذج
-        document.getElementById('ratingForm').submit();
-    }
-</script> --}}
 
 </div>
 

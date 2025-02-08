@@ -10,10 +10,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    // public function dashboard()
-    // {
-    //     return view('admin.volunteers'); // تأكد من أن الـ view موجودة
-    // }
+   
 
 
     public function showBlinds(Request $request)
@@ -221,8 +218,6 @@ public function updateBlind(Request $request)
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            // You can choose to hash the password if it's provided
-           // 'password' => $request->password ? Hash::make($request->password) : $user->password,
             'user_type' => $request->user_type, // If user_type needs to be updated
         ]);
 
@@ -230,8 +225,6 @@ public function updateBlind(Request $request)
         $blind->update([
             'name' => $request->name,
             'email' => $request->email,
-            // You can choose to hash the password if it's provided
-            //'password' => $request->password ? Hash::make($request->password) : $user->password,
             'user_type' => $request->user_type, // If user_type needs to be updated
 
             'age' => $request->age,
@@ -240,7 +233,6 @@ public function updateBlind(Request $request)
 
             'gender' => $request->gender,
 
-            // Note: user_type is typically not updated in volunteer's table
         ]);
 
 
@@ -270,8 +262,6 @@ public function updateBlind(Request $request)
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            // You can choose to hash the password if it's provided
-           // 'password' => $request->password ? Hash::make($request->password) : $user->password,
             'user_type' => $request->user_type, // If user_type needs to be updated
         ]);
 
@@ -279,8 +269,6 @@ public function updateBlind(Request $request)
         $volunteer->update([
             'name' => $request->name,
             'email' => $request->email,
-            // You can choose to hash the password if it's provided
-            //'password' => $request->password ? Hash::make($request->password) : $user->password,
             'user_type' => $request->user_type, // If user_type needs to be updated
 
             'age' => $request->age,
@@ -292,7 +280,6 @@ public function updateBlind(Request $request)
             'available_days' => implode(',', $request->available_days),
             'available_from' => $request->available_from,
             'available_to' => $request->available_to,
-            // Note: user_type is typically not updated in volunteer's table
         ]);
 
 

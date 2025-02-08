@@ -80,51 +80,7 @@
         اكتمال المساعدة
     </button>
 @endif
-            {{-- <a id="helpButton" href="" class="flex items-center justify-center py-3 px-9 bg-customGreen text-white border border-customGreen hover:text-customGreen hover:bg-white rounded-lg font-bold text-sm h-12" onclick="handleButtonClick()"> تقديم المساعدة </a> --}}
-
-            {{-- <script>
-            let helpCompleted = false;
-
-            function handleButtonClick() {
-                var helpButton = document.getElementById("helpButton");
-
-                if (!helpCompleted) {
-                    // إرسال طلب المساعدة إلى الخادم
-                    // هنا يتوجب عليك إضافة طلب AJAX أو إرسال النموذج كما تراه مناسبًا لتقديم الطلب.
-                    fetch('{{ route("send.help.request", ["encryptedId" => Crypt::encrypt(Auth::user()->volunteer->id), "encryptedBlindId" => Crypt::encrypt($help_request->blind->id)]) }}', {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            // يمكنك إضافة أية بيانات إضافية هنا إذا كنت بحاجة إليها
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert("مرحبًا! شكرًا لتقديم المساعدة.");
-                        helpButton.innerHTML = "اكتمال المساعدة";
-                        helpCompleted = true;
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert("حدث خطأ أثناء تقديم المساعدة. يرجى المحاولة لاحقًا.");
-                    });
-                } else {
-                    let rating = prompt("من فضلك قيم الخدمة من 1 إلى 5:");
-                    if (rating >= 1 && rating <= 5) {
-                        // إرسال التقييم إلى الخادم أيضًا هنا إذا كنت ترغب في ذلك
-                        alert("شكرًا لتقييمك: " + rating);
-                        // إخفاء الزر بعد تقييم الخدمة
-                        helpButton.style.display = "none"; // إخفاء الزر
-                    } else {
-                        alert("الرجاء إدخال رقم صحيح من 1 إلى 5.");
-                    }
-                }
-            }
-            </script> --}}
-
+           
 
             </div>
           </div>
