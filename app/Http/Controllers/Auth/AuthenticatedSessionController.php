@@ -54,16 +54,16 @@ class AuthenticatedSessionController extends Controller
                 if ($volunteer) {
                     // تحقق من حالة المتطوع
                     if ($volunteer->status == 1) {
-                        session()->flash('alert', 'موافق'); // تخزين رسالة التنبيه
+                        session()->flash('alert', 'تم تسجيل الدخول ينجاح'); // تخزين رسالة التنبيه
                         return redirect()->route('volunteers.index');
                     } elseif ($volunteer->status == 0) {
                         session()->flash('alert', 'انتظر موافقة المسؤول'); // تخزين رسالة التنبيه لحالة 0
-                        return redirect()->route('landing.master');
+                        return redirect()->route('new.volunteer');
                     } elseif ($volunteer->status == 3) {
                         session()->flash('alert', 'تم حذف حسابك'); // تخزين رسالة التنبيه لحالة 3
                         return redirect()->route('landing.master');
                     } elseif ($volunteer->status == 2) {
-                        session()->flash('alert', 'انت مقيد'); // تخزين رسالة التنبيه لحالة 2
+                        session()->flash('alert', 'حسابك مقيد'); // تخزين رسالة التنبيه لحالة 2
                         return redirect()->route('landing.master');
                     }
                 }

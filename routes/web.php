@@ -38,7 +38,9 @@ Route::get('/select', function () {
 Route::resource('/register/volunteer',VolunteerController::class);
 Route::resource('/register/blind',BlindController::class);
 
-
+Route::get('/new-volunteer', function () {
+    return view('layoutv.new_volunteer');
+})->name('new.volunteer');
 
 
 

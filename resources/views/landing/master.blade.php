@@ -51,7 +51,42 @@
         <div class="absolute top-0 h-20 w-1 rounded-xl bg-customGreen mt-32"></div>
             <h1 class="text-gray-100 text-2xl mr-6 text-start mt-3">نظام رؤيتي يفتح أبوابه للمتطوعين الجدد</h1>
             <h1 class="text-gray-100 text-2xl mr-6 pb-10 text-start">بهدف مساعدة الكفيفين وتحسين جودة حياتهم عبر موقعنا</h1>
-        </div>
+
+            <div class="flex justify-center mt-20 text-xl font-bold absolute bottom-10 left-1/2 transform -translate-x-1/2">
+                @if (auth()->check())
+                @if (auth()->user()->user_type == 'admin')
+                    <a href="show/volunteers" class="inline-flex items-center px-4 py-2 bg-none text-white">
+                    الذهاب للرئيسية
+                    <svg class="w-7 h-7 mr-2" fill="#0F9C73" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16l-4-4m0 0l4-4m-4 4h8"></path>
+                    </svg>
+                    </a>
+                @elseif (auth()->user()->user_type == 'volunteer')
+                    <a href="volunteers" class="inline-flex items-center px-4 py-2 bg-none text-white">
+                    الذهاب للرئيسية
+                    <svg class="w-7 h-7 mr-2" fill="#0F9C73" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16l-4-4m0 0l4-4m-4 4h8"></path>
+                    </svg>
+                    </a>
+                @elseif (auth()->user()->user_type == 'blind')
+                    <a href="blinds" class="inline-flex items-center px-4 py-2 bg-none text-white">
+                    الذهاب للرئيسية
+                    <svg class="w-7 h-7 mr-2" fill="#0F9C73" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16l-4-4m0 0l4-4m-4 4h8"></path>
+                    </svg>
+                    </a>
+                @endif
+                @else
+                <a href="/login" class="inline-flex items-center px-4 py-2 bg-none text-white">
+                    الذهاب للرئيسية
+                    <svg class="w-7 h-7 mr-2" fill="#0F9C73" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16l-4-4m0 0l4-4m-4 4h8"></path>
+                    </svg>
+                </a>
+                @endif
+            </div>
+
+
         </div>
   </div>
 
@@ -67,6 +102,7 @@
                 <br>
                 انضم إلينا في رحلتنا لإحداث فرق حقيقي في حياة الأشخاص المكفوفين من خلال التعاون والمشاركة.
             </h1>
+            <div class=" border-b border-gray-200 mt-6 mx-20"></div>
         </div>
 
         <div class="flex flex-col items-center justify-center m-10 sm:m-0">

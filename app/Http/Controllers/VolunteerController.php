@@ -75,7 +75,7 @@ class VolunteerController extends Controller
             'user_type' => $request->user_type,
 
 ]);
-return redirect()->route('volunteers.index');
+return redirect()->route('new.volunteer');
 
 
 
